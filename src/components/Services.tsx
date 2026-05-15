@@ -6,7 +6,7 @@ import { useLanguage } from "@/context/LanguageContext";
 
 export default function Services() {
   const { t } = useLanguage();
-  const [tab, setTab] = useState<"residential" | "commercial">("residential");
+  const [tab, setTab] = useState<"residential" | "commercial" | "signature">("residential");
   const [lightbox, setLightbox] = useState<string | null>(null);
 
   useEffect(() => {
@@ -26,6 +26,16 @@ export default function Services() {
     t("commercial.s4"), t("commercial.s5"), t("commercial.s6"), t("commercial.s7"),
   ];
 
+  const signature = [
+    "Limewash Finishes", "Roman Clay Finishes", "Venetian Plaster",
+    "Textured Feature Walls", "Luxury Matte Finishes", "Decorative Architectural Finishes",
+    "Designer Color Consultation", "Warm Neutral Palette Design", "Earthy Mediterranean Finishes",
+    "Modern Organic Interior Finishes", "Monochromatic Luxury Walls", "Seamless Architectural Finishes",
+    "Custom Accent Walls", "High-End Wall Textures", "Architectural Color Direction",
+    "Contemporary Interior Wall Treatments", "Premium Decorative Coatings", "Soft Matte Wall Systems",
+    "Bespoke Finish Applications", "Modern Luxury Surface Finishes",
+  ];
+
   return (
     <section id="services" className="py-28 lg:py-40 bg-[#F4F0E8]">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
@@ -38,12 +48,12 @@ export default function Services() {
               <span className="text-[#E77B00] text-xs font-medium tracking-[0.25em] uppercase">Services</span>
             </div>
             <h2 className="text-5xl lg:text-6xl font-semibold text-[#1F1F1F]">
-              {tab === "residential" ? t("residential.title") : t("commercial.title")}
+              {tab === "residential" ? t("residential.title") : tab === "commercial" ? t("commercial.title") : "Signature Services"}
             </h2>
           </div>
 
           {/* Tabs */}
-          <div className="flex gap-1 border border-[#D9CBB8] rounded-sm overflow-hidden self-start">
+          <div className="flex gap-1 border border-[#D9CBB8] rounded-sm overflow-hidden self-start flex-wrap">
             <button
               onClick={() => setTab("residential")}
               className={`px-5 py-2.5 text-xs font-semibold tracking-widest uppercase transition-all duration-200 ${
@@ -64,6 +74,16 @@ export default function Services() {
             >
               {t("nav.commercial")}
             </button>
+            <button
+              onClick={() => setTab("signature")}
+              className={`px-5 py-2.5 text-xs font-semibold tracking-widest uppercase transition-all duration-200 ${
+                tab === "signature"
+                  ? "bg-[#1F1F1F] text-white"
+                  : "text-[#5B3A29]/60 hover:text-[#5B3A29] hover:bg-[#D9CBB8]/20"
+              }`}
+            >
+              Signature
+            </button>
           </div>
         </div>
 
@@ -71,10 +91,10 @@ export default function Services() {
           {/* Service list */}
           <div>
             <p className="text-[#5B3A29]/65 text-base mb-10 font-light leading-relaxed">
-              {tab === "residential" ? t("residential.sub") : t("commercial.sub")}
+              {tab === "residential" ? t("residential.sub") : tab === "commercial" ? t("commercial.sub") : "Luxury decorative wall finishes that define the character of premium interiors — from ancient Roman clay to contemporary limewash and bespoke Venetian plaster."}
             </p>
             <ul className="space-y-0 border-t border-[#D9CBB8]/50">
-              {(tab === "residential" ? residential : commercial).map((service, i) => (
+              {(tab === "residential" ? residential : tab === "commercial" ? commercial : signature).map((service, i) => (
                 <li key={i} className="flex items-center gap-4 py-4 border-b border-[#D9CBB8]/50 group">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#E77B00] flex-shrink-0" />
                   <span className="text-[#1F1F1F] text-sm font-medium group-hover:text-[#E77B00] transition-colors duration-200">{service}</span>
@@ -92,10 +112,10 @@ export default function Services() {
           {/* Images — clean 2×2 grid */}
           <div className="grid grid-cols-2 gap-3">
             {[
-              tab === "residential" ? "/images/pintor/5.png" : "/images/pintor/15.png",
-              tab === "residential" ? "/images/proyectos/1.png" : "/images/pintor/7.png",
-              tab === "residential" ? "/images/pintor/20.png" : "/images/pintor/10.png",
-              tab === "residential" ? "/images/proyectos/4.png" : "/images/pintor/17.png",
+              tab === "residential" ? "/images/pintor/5.png" : tab === "commercial" ? "/images/pintor/15.png" : "/images/pintor/32.png",
+              tab === "residential" ? "/images/proyectos/1.png" : tab === "commercial" ? "/images/pintor/7.png" : "/images/pintor/33.png",
+              tab === "residential" ? "/images/pintor/20.png" : tab === "commercial" ? "/images/pintor/10.png" : "/images/pintor/34.png",
+              tab === "residential" ? "/images/proyectos/4.png" : tab === "commercial" ? "/images/pintor/17.png" : "/images/pintor/35.png",
             ].map((src, i) => (
               <div
                 key={i}
