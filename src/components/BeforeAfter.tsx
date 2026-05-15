@@ -30,7 +30,7 @@ export default function BeforeAfter() {
             <span className="text-[#F7941D] text-xs font-semibold tracking-[0.2em] uppercase">Before & After</span>
             <span className="w-8 h-px bg-[#F7941D]" />
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4 max-w-2xl mx-auto">
+          <h2 className="text-5xl lg:text-6xl font-bold uppercase text-white mb-4 max-w-2xl mx-auto">
             {t("ba.title")}
           </h2>
           <p className="text-white/55 text-lg font-light max-w-xl mx-auto">

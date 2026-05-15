@@ -25,9 +25,9 @@ export default function Home() {
         <Hero />
         <TrustBar />
         <About />
+        <ComboDifference />
         <Services />
         <ColorStudio />
-        <ComboDifference />
         <BeforeAfter />
         <Process />
         <Areas />
