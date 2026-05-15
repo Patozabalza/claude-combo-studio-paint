@@ -111,7 +111,7 @@ export default function Services() {
 
           {/* Images */}
           {tab === "signature" ? (
-            <div className="grid grid-cols-3 gap-3">
+            <div className="flex flex-col gap-4">
               {[
                 { src: "/images/pintor/34.png", alt: "Limewash wall finish - luxury home Miami green sage" },
                 { src: "/images/pintor/31.png", alt: "Limewash decorative finish - boutique interior Miami" },
@@ -119,7 +119,7 @@ export default function Services() {
               ].map(({ src, alt }, i) => (
                 <div
                   key={i}
-                  className="relative overflow-hidden cursor-zoom-in group aspect-square"
+                  className="relative h-72 overflow-hidden cursor-zoom-in group"
                   onClick={() => setLightbox(src)}
                 >
                   <Image
