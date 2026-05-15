@@ -116,7 +116,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Areas
     "areas.title": "Proudly Serving Miami-Dade County",
-    "areas.body": "Miami · Miami Beach · Coral Gables · Doral · Hialeah · Kendall · Homestead · Cutler Bay · West Miami · South Miami · North Miami · Sweetwater · Palmetto Bay · Miami Gardens · Miami Lakes · Pinecrest · Aventura · Miramar · Westchester · Miami-Dade County and surrounding areas.",
+    "areas.body": "From Coral Gables to Aventura, from Kendall to Miami Beach — we bring premium craftsmanship to every neighborhood across Miami-Dade County.",
 
     // Testimonials
     "test.title": "What Our Clients Say",
@@ -284,7 +284,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Areas
     "areas.title": "Atendemos Todo Miami-Dade",
-    "areas.body": "Miami · Miami Beach · Coral Gables · Doral · Hialeah · Kendall · Homestead · Cutler Bay · West Miami · South Miami · North Miami · Sweetwater · Palmetto Bay · Miami Gardens · Miami Lakes · Pinecrest · Aventura · Miramar · Westchester · Miami-Dade y alrededores.",
+    "areas.body": "Desde Coral Gables hasta Aventura, desde Kendall hasta Miami Beach — llevamos acabados premium a cada vecindario del condado de Miami-Dade.",
 
     // Testimonials
     "test.title": "Lo Que Dicen Nuestros Clientes",
