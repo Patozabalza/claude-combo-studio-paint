@@ -82,41 +82,41 @@ export default function Services() {
             </a>
           </div>
 
-          {/* Images — editorial mosaic */}
+          {/* Images — clean 2×2 grid */}
           <div className="grid grid-cols-2 gap-3">
             <div className="relative h-72 overflow-hidden">
               <Image
                 src={tab === "residential" ? "/images/pintor/5.png" : "/images/pintor/15.png"}
                 alt="Painting service"
                 fill
-                className="object-cover transition-all duration-700 hover:scale-105"
+                className="object-cover transition-transform duration-700 hover:scale-105"
                 quality={80}
               />
             </div>
-            <div className="relative h-72 overflow-hidden mt-10">
+            <div className="relative h-72 overflow-hidden">
               <Image
                 src={tab === "residential" ? "/images/proyectos/1.png" : "/images/proyectos/5.png"}
                 alt="Premium result"
                 fill
-                className="object-cover transition-all duration-700 hover:scale-105"
+                className="object-cover transition-transform duration-700 hover:scale-105"
                 quality={80}
               />
             </div>
-            <div className="relative h-48 overflow-hidden">
+            <div className="relative h-72 overflow-hidden">
               <Image
                 src={tab === "residential" ? "/images/pintor/20.png" : "/images/pintor/10.png"}
                 alt="Professional service"
                 fill
-                className="object-cover transition-all duration-700 hover:scale-105"
+                className="object-cover transition-transform duration-700 hover:scale-105"
                 quality={80}
               />
             </div>
-            <div className="relative h-48 overflow-hidden mt-4">
+            <div className="relative h-72 overflow-hidden">
               <Image
                 src={tab === "residential" ? "/images/proyectos/4.png" : "/images/proyectos/2.png"}
                 alt="Finished project"
                 fill
-                className="object-cover transition-all duration-700 hover:scale-105"
+                className="object-cover transition-transform duration-700 hover:scale-105"
                 quality={80}
               />
             </div>
