@@ -113,8 +113,8 @@ export default function Services() {
           {tab === "signature" ? (
             <div className="flex flex-col gap-4">
               {[
-                { src: "/images/pintor/34.png", alt: "Limewash wall finish - luxury home Miami green sage" },
                 { src: "/images/pintor/31.png", alt: "Limewash decorative finish - boutique interior Miami" },
+                { src: "/images/pintor/34.png", alt: "Limewash wall finish - luxury home Miami green sage" },
                 { src: "/images/pintor/32.png", alt: "Venetian plaster and limewash finish - Miami waterfront home" },
               ].map(({ src, alt }, i) => (
                 <div
