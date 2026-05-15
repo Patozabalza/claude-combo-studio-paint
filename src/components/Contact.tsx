@@ -19,18 +19,21 @@ export default function Contact() {
     e.preventDefault();
     setStatus("sending");
     try {
-      await fetch("https://formsubmit.co/ajax/combostudiopaint@gmail.com", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          ...form,
-          _replyto: form.email,
-          _subject: `New quote request — ${form.type || "General"} | Combo Studio Paint`,
-          _captcha: "false",
-        }),
+      const body = new URLSearchParams({
+        "form-name": "contact",
+        ...form,
       });
-      setStatus("success");
-      setForm({ name: "", phone: "", email: "", type: "", service: "", location: "", message: "", method: "" });
+      const res = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (res.ok) {
+        setStatus("success");
+        setForm({ name: "", phone: "", email: "", type: "", service: "", location: "", message: "", method: "" });
+      } else {
+        setStatus("idle");
+      }
     } catch {
       setStatus("idle");
     }

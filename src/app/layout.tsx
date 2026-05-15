@@ -242,6 +242,15 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased bg-[#F4F0E8] text-[#5B3A29] overflow-x-hidden">
+        {/* Hidden form for Netlify build-time detection */}
+        <form name="contact" data-netlify="true" hidden>
+          <input type="text" name="name" />
+          <input type="text" name="phone" />
+          <input type="email" name="email" />
+          <select name="type" /><select name="method" />
+          <input type="text" name="location" />
+          <textarea name="message" />
+        </form>
         {children}
       </body>
     </html>
