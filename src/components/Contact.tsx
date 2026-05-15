@@ -19,10 +19,15 @@ export default function Contact() {
     e.preventDefault();
     setStatus("sending");
     try {
-      await fetch("https://formspree.io/f/combostudiopaint", {
+      await fetch("https://formsubmit.co/ajax/combostudiopaint@gmail.com", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ ...form, _replyto: form.email }),
+        body: JSON.stringify({
+          ...form,
+          _replyto: form.email,
+          _subject: `New quote request — ${form.type || "General"} | Combo Studio Paint`,
+          _captcha: "false",
+        }),
       });
       setStatus("success");
       setForm({ name: "", phone: "", email: "", type: "", service: "", location: "", message: "", method: "" });
