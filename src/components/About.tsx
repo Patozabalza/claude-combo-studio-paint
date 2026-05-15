@@ -13,22 +13,22 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-28 bg-[#0A0A0A]">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <section id="about" className="py-24 lg:py-32 bg-[#F4F0E8]">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* Text side */}
           <div>
             <div className="inline-flex items-center gap-2 mb-8">
-              <span className="w-8 h-px bg-[#F7941D]" />
-              <span className="text-[#F7941D] text-xs font-semibold tracking-[0.2em] uppercase">About Us</span>
+              <span className="w-8 h-px bg-[#E77B00]" />
+              <span className="text-[#E77B00] text-xs font-semibold tracking-[0.2em] uppercase">About Us</span>
             </div>
-            <h2 className="text-5xl lg:text-6xl font-bold uppercase text-white leading-tight mb-2">
+            <h2 className="text-5xl lg:text-6xl font-semibold text-[#1F1F1F] leading-tight mb-2">
               {t("about.title")}
             </h2>
-            <h2 className="text-5xl lg:text-6xl font-bold uppercase text-[#F7941D] leading-tight mb-8">
+            <h2 className="text-5xl lg:text-6xl font-semibold text-[#E77B00] leading-tight mb-8">
               {t("about.titleAccent")}
             </h2>
-            <p className="text-white/65 text-lg leading-relaxed mb-12 font-light">
+            <p className="text-[#5B3A29]/80 text-lg leading-relaxed mb-12 font-light">
               {t("about.body")}
             </p>
 
@@ -36,8 +36,11 @@ export default function About() {
             <div className="grid grid-cols-3 gap-8">
               {stats.map((stat, i) => (
                 <div key={i}>
-                  <div className="text-3xl lg:text-4xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="text-white/50 text-sm font-medium">{stat.label}</div>
+                  <div className="text-3xl lg:text-4xl font-semibold text-[#1F1F1F] mb-1"
+                    style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', Georgia, serif" }}>
+                    {stat.value}
+                  </div>
+                  <div className="text-[#5B3A29]/60 text-sm font-medium">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -45,7 +48,7 @@ export default function About() {
 
           {/* Image side */}
           <div className="relative">
-            <div className="relative h-[550px] rounded-2xl overflow-hidden">
+            <div className="relative h-[550px] rounded-2xl overflow-hidden shadow-xl shadow-[#5B3A29]/10">
               <Image
                 src="/images/proyectos/1.png"
                 alt="Luxury Miami interior - Combo Studio Paint"
@@ -53,12 +56,15 @@ export default function About() {
                 className="object-cover"
                 quality={85}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1F1F1F]/30 to-transparent" />
             </div>
             {/* Accent card */}
-            <div className="absolute -bottom-6 -left-6 bg-[#F7941D] p-6 rounded-xl max-w-[200px]">
-              <div className="text-white text-4xl font-bold">10+</div>
-              <div className="text-white/80 text-sm mt-1 leading-tight">Years elevating Miami spaces</div>
+            <div className="absolute -bottom-6 -left-6 bg-[#E77B00] p-6 rounded-xl max-w-[200px] shadow-lg">
+              <div className="text-white text-4xl font-semibold"
+                style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', Georgia, serif" }}>
+                10+
+              </div>
+              <div className="text-white/85 text-sm mt-1 leading-tight">Years elevating Miami spaces</div>
             </div>
           </div>
         </div>

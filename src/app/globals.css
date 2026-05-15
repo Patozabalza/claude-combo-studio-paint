@@ -1,16 +1,15 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-brand-black: #0A0A0A;
-  --color-brand-dark: #111111;
-  --color-brand-charcoal: #1A1A1A;
+  --color-brand-ivory: #F4F0E8;
   --color-brand-white: #FFFFFF;
-  --color-brand-sand: #F0EDE8;
-  --color-brand-stone: #C4BAB0;
-  --color-brand-orange: #F7941D;
-  --color-brand-orange-dark: #E07810;
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-barlow);
+  --color-brand-sand: #D9CBB8;
+  --color-brand-espresso: #5B3A29;
+  --color-brand-charcoal: #1F1F1F;
+  --color-brand-orange: #E77B00;
+  --color-brand-orange-dark: #C96900;
+  --font-sans: var(--font-montserrat);
+  --font-display: var(--font-cormorant);
 }
 
 * {
@@ -24,24 +23,24 @@ html {
 }
 
 body {
-  background: #0A0A0A;
-  color: #FFFFFF;
-  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+  background: #F4F0E8;
+  color: #5B3A29;
+  font-family: var(--font-montserrat), 'Montserrat', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--font-barlow), 'Barlow Condensed', system-ui, sans-serif;
-  font-weight: 700;
+  font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
 }
 
 ::selection {
-  background: #F7941D;
+  background: #E77B00;
   color: #FFFFFF;
 }
 
 ::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: #0A0A0A; }
-::-webkit-scrollbar-thumb { background: #F7941D; border-radius: 2px; }
+::-webkit-scrollbar-track { background: #F4F0E8; }
+::-webkit-scrollbar-thumb { background: #E77B00; border-radius: 2px; }

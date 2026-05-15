@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Barlow_Condensed } from "next/font/google";
+import { Montserrat, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const barlow = Barlow_Condensed({
-  variable: "--font-barlow",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -92,7 +92,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${barlow.variable} scroll-smooth`}>
+    <html lang="en" className={`${montserrat.variable} ${cormorant.variable} scroll-smooth`}>
       <head>
         <script
           type="application/ld+json"
@@ -141,7 +141,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased bg-brand-black text-brand-white overflow-x-hidden">
+      <body className="antialiased bg-[#F4F0E8] text-[#5B3A29] overflow-x-hidden">
         {children}
       </body>
     </html>
