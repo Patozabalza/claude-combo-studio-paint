@@ -20,6 +20,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
@@ -29,11 +30,30 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 h1, h2, h3, h4 {
   font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
   font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-optical-sizing: auto;
+}
+
+h1 {
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+h2 {
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+p {
+  line-height: 1.7;
 }
 
 ::selection {
@@ -41,6 +61,11 @@ h1, h2, h3, h4 {
   color: #FFFFFF;
 }
 
-::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar { width: 2px; }
 ::-webkit-scrollbar-track { background: #F4F0E8; }
 ::-webkit-scrollbar-thumb { background: #E77B00; border-radius: 2px; }
+
+/* Smooth section transitions */
+section {
+  position: relative;
+}
