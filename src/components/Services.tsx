@@ -112,7 +112,10 @@ export default function Services() {
           {/* Images */}
           {tab === "signature" ? (
             <div className="grid grid-cols-2 gap-3">
-              {["/images/pintor/34.png", "/images/pintor/32.png"].map((src, i) => (
+              {[
+                { src: "/images/pintor/34.png", alt: "Limewash wall finish - luxury home Miami green sage" },
+                { src: "/images/pintor/32.png", alt: "Venetian plaster and limewash finish - Miami waterfront home" },
+              ].map(({ src, alt }, i) => (
                 <div
                   key={i}
                   className="relative overflow-hidden cursor-zoom-in group"
@@ -121,7 +124,7 @@ export default function Services() {
                 >
                   <Image
                     src={src}
-                    alt="Signature finish"
+                    alt={alt}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     quality={85}
@@ -136,12 +139,17 @@ export default function Services() {
             </div>
           ) : (
             <div className="grid grid-cols-2 gap-3">
-              {[
-                tab === "residential" ? "/images/pintor/5.png" : "/images/pintor/15.png",
-                tab === "residential" ? "/images/proyectos/1.png" : "/images/pintor/7.png",
-                tab === "residential" ? "/images/pintor/20.png" : "/images/pintor/10.png",
-                tab === "residential" ? "/images/proyectos/4.png" : "/images/pintor/17.png",
-              ].map((src, i) => (
+              {(tab === "residential" ? [
+                { src: "/images/pintor/5.png", alt: "Interior painting - luxury home Miami-Dade" },
+                { src: "/images/proyectos/1.png", alt: "Premium interior painting result - residential Miami" },
+                { src: "/images/pintor/20.png", alt: "Exterior pressure washing and painting - Miami home" },
+                { src: "/images/proyectos/4.png", alt: "Before and after interior painting - Miami Beach" },
+              ] : [
+                { src: "/images/pintor/15.png", alt: "Commercial painting - warehouse exterior Miami-Dade" },
+                { src: "/images/pintor/7.png", alt: "Google office commercial painting - Combo Studio Paint Miami" },
+                { src: "/images/pintor/10.png", alt: "Commercial painting - marina dock coating Miami" },
+                { src: "/images/pintor/17.png", alt: "Large scale warehouse painting - industrial Miami-Dade" },
+              ]).map(({ src, alt }, i) => (
                 <div
                   key={i}
                   className="relative h-72 overflow-hidden cursor-zoom-in group"
@@ -149,7 +157,7 @@ export default function Services() {
                 >
                   <Image
                     src={src}
-                    alt="Painting project"
+                    alt={alt}
                     fill
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     quality={80}

@@ -53,7 +53,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Residential
     "residential.title": "Residential Painting Services",
-    "residential.sub": "For luxury homes, condos, HOAs and modern living spaces.",
+    "residential.sub": "Professional interior and exterior painting for luxury homes, condos, HOA communities and residential properties across Miami-Dade County.",
     "residential.s1": "Interior Painting",
     "residential.s2": "Exterior Painting",
     "residential.s3": "Luxury Homes",
@@ -67,7 +67,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Commercial
     "commercial.title": "Professional Solutions for Modern Commercial Spaces.",
-    "commercial.sub": "Efficient, premium painting execution for business environments and large-scale projects.",
+    "commercial.sub": "Premium commercial painting for offices, retail spaces, restaurants, warehouses, multifamily buildings and hospitality projects across Miami-Dade County.",
     "commercial.s1": "Offices",
     "commercial.s2": "Retail Spaces",
     "commercial.s3": "Restaurants",
@@ -146,6 +146,10 @@ const translations: Record<Language, Record<string, string>> = {
     "faq.a6": "Yes. We scale our team and execution strategy to match the scope of each project, from single units to large multifamily buildings and new developments.",
     "faq.q7": "How can I request a quote?",
     "faq.a7": "You can reach us by phone, WhatsApp or the contact form on this page. We'll schedule a site visit and deliver a detailed, no-obligation proposal.",
+    "faq.q8": "Do you offer limewash, venetian plaster and specialty finishes?",
+    "faq.a8": "Yes. Our Signature Services division specializes in luxury decorative wall finishes including Limewash, Roman Clay, Venetian Plaster, textured feature walls, earthy Mediterranean finishes and custom accent walls — the most in-demand treatments in Miami's premium residential and hospitality market.",
+    "faq.q9": "Why are limewash and roman clay finishes so popular in Miami luxury homes?",
+    "faq.a9": "These ancient finishes create a depth, warmth and texture that no standard paint can replicate. They're breathable, naturally antimicrobial, and age beautifully — perfectly suited to Miami's climate and the organic, warm-neutral aesthetic that defines high-end interiors today.",
 
     // Contact
     "contact.title": "Let's Bring Your Vision to Life.",
@@ -314,6 +318,10 @@ const translations: Record<Language, Record<string, string>> = {
     "faq.a6": "Sí. Escalamos nuestro equipo y estrategia de ejecución según el alcance de cada proyecto, desde unidades individuales hasta grandes edificios multifamily y nuevos desarrollos.",
     "faq.q7": "¿Cómo puedo solicitar una cotización?",
     "faq.a7": "Puede contactarnos por teléfono, WhatsApp o el formulario en esta página. Agendaremos una visita al sitio y entregaremos una propuesta detallada sin compromiso.",
+    "faq.q8": "¿Ofrecen limewash, estuco veneciano y acabados decorativos?",
+    "faq.a8": "Sí. Nuestro servicio Signature está especializado en acabados decorativos de lujo: Limewash, Roman Clay, Estuco Veneciano, paredes texturizadas, acabados mediterráneos y paredes de acento personalizadas — los tratamientos más demandados en el mercado residencial premium de Miami.",
+    "faq.q9": "¿Por qué los acabados limewash y roman clay son tan populares en hogares de lujo en Miami?",
+    "faq.a9": "Estos acabados ancestrales crean profundidad, calidez y textura que ninguna pintura convencional puede replicar. Son transpirables, naturalmente antimicrobianos y envejecen bellamente — ideales para el clima de Miami y la estética orgánica y cálida que define los interiores de alto nivel hoy.",
 
     // Contact
     "contact.title": "Hagamos realidad tu visión.",
