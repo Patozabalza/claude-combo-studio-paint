@@ -93,9 +93,9 @@ export default function Services() {
           <div className="grid grid-cols-2 gap-3">
             {[
               tab === "residential" ? "/images/pintor/5.png" : "/images/pintor/15.png",
-              tab === "residential" ? "/images/proyectos/1.png" : "/images/proyectos/5.png",
+              tab === "residential" ? "/images/proyectos/1.png" : "/images/pintor/14.png",
               tab === "residential" ? "/images/pintor/20.png" : "/images/pintor/10.png",
-              tab === "residential" ? "/images/proyectos/4.png" : "/images/proyectos/2.png",
+              tab === "residential" ? "/images/proyectos/4.png" : "/images/pintor/17.png",
             ].map((src, i) => (
               <div
                 key={i}
