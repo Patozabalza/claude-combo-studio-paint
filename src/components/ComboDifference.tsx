@@ -33,24 +33,24 @@ export default function ComboDifference() {
   ];
 
   return (
-    <section className="py-28 bg-[#181818]">
+    <section className="py-28 bg-[#111111]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-6">
-            <span className="w-8 h-px bg-[#E8631A]" />
-            <span className="text-[#E8631A] text-xs font-semibold tracking-[0.2em] uppercase">Why COMBO</span>
-            <span className="w-8 h-px bg-[#E8631A]" />
+            <span className="w-8 h-px bg-[#F7941D]" />
+            <span className="text-[#F7941D] text-xs font-semibold tracking-[0.2em] uppercase">Why COMBO</span>
+            <span className="w-8 h-px bg-[#F7941D]" />
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white">{t("diff.title")}</h2>
+          <h2 className="text-5xl lg:text-6xl font-bold uppercase text-white">{t("diff.title")}</h2>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {items.map((item, i) => (
             <div
               key={i}
-              className="group bg-[#0D1117] border border-white/5 hover:border-[#E8631A]/30 rounded-xl p-6 transition-all duration-300 hover:bg-[#0D1117]/80"
+              className="group bg-[#0A0A0A] border border-white/5 hover:border-[#F7941D]/30 rounded-xl p-6 transition-all duration-300 hover:bg-[#0A0A0A]/80"
             >
-              <div className="w-12 h-12 rounded-lg bg-[#E8631A]/10 group-hover:bg-[#E8631A]/20 flex items-center justify-center mb-4 text-[#E8631A] transition-colors duration-300">
+              <div className="w-12 h-12 rounded-lg bg-[#F7941D]/10 group-hover:bg-[#F7941D]/20 flex items-center justify-center mb-4 text-[#F7941D] transition-colors duration-300">
                 {differenceIcons[i]}
               </div>
               <p className="text-white font-semibold text-base">{item}</p>

@@ -22,13 +22,13 @@ export default function BeforeAfter() {
   const { t, lang } = useLanguage();
 
   return (
-    <section id="before-after" className="py-28 bg-[#0D1117]">
+    <section id="before-after" className="py-28 bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-6">
-            <span className="w-8 h-px bg-[#E8631A]" />
-            <span className="text-[#E8631A] text-xs font-semibold tracking-[0.2em] uppercase">Before & After</span>
-            <span className="w-8 h-px bg-[#E8631A]" />
+            <span className="w-8 h-px bg-[#F7941D]" />
+            <span className="text-[#F7941D] text-xs font-semibold tracking-[0.2em] uppercase">Before & After</span>
+            <span className="w-8 h-px bg-[#F7941D]" />
           </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4 max-w-2xl mx-auto">
             {t("ba.title")}
@@ -51,9 +51,9 @@ export default function BeforeAfter() {
                       className="object-cover grayscale"
                       quality={75}
                     />
-                    <div className="absolute inset-0 bg-[#0D1117]/40" />
+                    <div className="absolute inset-0 bg-[#0A0A0A]/40" />
                   </div>
-                  <div className="absolute top-3 left-3 bg-[#0D1117]/80 backdrop-blur text-white text-xs font-semibold px-3 py-1.5 rounded tracking-widest uppercase">
+                  <div className="absolute top-3 left-3 bg-[#0A0A0A]/80 backdrop-blur text-white text-xs font-semibold px-3 py-1.5 rounded tracking-widest uppercase">
                     {t("ba.before")}
                   </div>
                 </div>
@@ -67,7 +67,7 @@ export default function BeforeAfter() {
                       quality={75}
                     />
                   </div>
-                  <div className="absolute top-3 right-3 bg-[#E8631A] text-white text-xs font-semibold px-3 py-1.5 rounded tracking-widest uppercase">
+                  <div className="absolute top-3 right-3 bg-[#F7941D] text-white text-xs font-semibold px-3 py-1.5 rounded tracking-widest uppercase">
                     {t("ba.after")}
                   </div>
                 </div>

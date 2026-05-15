@@ -18,15 +18,15 @@ export default function Hero() {
       {/* Background image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/pintor/1.png"
-          alt="Combo Studio Paint - Premium Painting Miami"
+          src="/images/proyectos/7.png"
+          alt="Combo Studio Paint - Luxury Miami Property"
           fill
           className="object-cover object-center"
           priority
           quality={90}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0D1117]/90 via-[#0D1117]/60 to-[#0D1117]/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117]/80 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 via-[#0A0A0A]/60 to-[#0A0A0A]/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/80 via-transparent to-transparent" />
       </div>
 
       {/* Content */}
@@ -40,14 +40,14 @@ export default function Hero() {
         >
           {/* Badge */}
           <div className="inline-flex items-center gap-2 mb-8">
-            <span className="w-8 h-px bg-[#E8631A]" />
-            <span className="text-[#E8631A] text-xs font-semibold tracking-[0.2em] uppercase">
+            <span className="w-8 h-px bg-[#F7941D]" />
+            <span className="text-[#F7941D] text-xs font-semibold tracking-[0.2em] uppercase">
               {t("hero.badge")}
             </span>
           </div>
 
           {/* Headline */}
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.05] mb-6 tracking-tight">
+          <h1 className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl font-bold text-white leading-[0.95] mb-6 uppercase tracking-tight" style={{ fontFamily: "var(--font-barlow), 'Barlow Condensed', sans-serif" }}>
             {t("hero.headline")}
           </h1>
 
@@ -60,7 +60,7 @@ export default function Hero() {
           <div className="flex flex-wrap gap-4">
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 bg-[#E8631A] hover:bg-[#d45515] text-white font-semibold px-7 py-3.5 rounded transition-all duration-200 text-sm tracking-wide shadow-lg shadow-[#E8631A]/20"
+              className="inline-flex items-center gap-2 bg-[#F7941D] hover:bg-[#E07810] text-white font-semibold px-7 py-3.5 rounded transition-all duration-200 text-sm tracking-wide shadow-lg shadow-[#F7941D]/20"
             >
               {t("hero.cta1")}
             </a>

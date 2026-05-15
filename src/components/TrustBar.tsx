@@ -25,12 +25,12 @@ export default function TrustBar() {
   ];
 
   return (
-    <div className="bg-[#181818] border-y border-white/5 py-5">
+    <div className="bg-[#111111] border-y border-white/5 py-5">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-wrap justify-center lg:justify-between gap-6">
           {items.map((item, i) => (
             <div key={i} className="flex items-center gap-2.5 text-white/60 hover:text-white transition-colors duration-200">
-              <span className="text-[#E8631A]">{icons[i]}</span>
+              <span className="text-[#F7941D]">{icons[i]}</span>
               <span className="text-sm font-medium tracking-wide whitespace-nowrap">{item}</span>
             </div>
           ))}

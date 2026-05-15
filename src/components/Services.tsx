@@ -20,11 +20,11 @@ export default function Services() {
   ];
 
   return (
-    <section id="services" className="py-28 bg-[#181818]">
+    <section id="services" className="py-28 bg-[#111111]">
       <div className="max-w-7xl mx-auto px-6">
         <div className="inline-flex items-center gap-2 mb-8">
-          <span className="w-8 h-px bg-[#E8631A]" />
-          <span className="text-[#E8631A] text-xs font-semibold tracking-[0.2em] uppercase">Services</span>
+          <span className="w-8 h-px bg-[#F7941D]" />
+          <span className="text-[#F7941D] text-xs font-semibold tracking-[0.2em] uppercase">Services</span>
         </div>
 
         {/* Tabs */}
@@ -33,7 +33,7 @@ export default function Services() {
             onClick={() => setTab("residential")}
             className={`px-6 py-2.5 rounded text-sm font-semibold tracking-wide transition-all duration-200 ${
               tab === "residential"
-                ? "bg-[#E8631A] text-white"
+                ? "bg-[#F7941D] text-white"
                 : "border border-white/20 text-white/60 hover:text-white hover:border-white/40"
             }`}
           >
@@ -43,7 +43,7 @@ export default function Services() {
             onClick={() => setTab("commercial")}
             className={`px-6 py-2.5 rounded text-sm font-semibold tracking-wide transition-all duration-200 ${
               tab === "commercial"
-                ? "bg-[#E8631A] text-white"
+                ? "bg-[#F7941D] text-white"
                 : "border border-white/20 text-white/60 hover:text-white hover:border-white/40"
             }`}
           >
@@ -54,7 +54,7 @@ export default function Services() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Text */}
           <div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
+            <h2 className="text-5xl lg:text-6xl font-bold uppercase text-white leading-tight mb-4">
               {tab === "residential" ? t("residential.title") : t("commercial.title")}
             </h2>
             <p className="text-white/60 text-lg mb-10 font-light">
@@ -63,8 +63,8 @@ export default function Services() {
             <ul className="space-y-3">
               {(tab === "residential" ? residential : commercial).map((service, i) => (
                 <li key={i} className="flex items-center gap-3 text-white/80 font-medium group">
-                  <span className="w-5 h-5 rounded-full border border-[#E8631A] flex items-center justify-center flex-shrink-0 group-hover:bg-[#E8631A] transition-colors duration-200">
-                    <svg className="w-2.5 h-2.5 text-[#E8631A] group-hover:text-white transition-colors duration-200" fill="currentColor" viewBox="0 0 20 20">
+                  <span className="w-5 h-5 rounded-full border border-[#F7941D] flex items-center justify-center flex-shrink-0 group-hover:bg-[#F7941D] transition-colors duration-200">
+                    <svg className="w-2.5 h-2.5 text-[#F7941D] group-hover:text-white transition-colors duration-200" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                   </span>
@@ -74,7 +74,7 @@ export default function Services() {
             </ul>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 mt-10 bg-[#E8631A] hover:bg-[#d45515] text-white font-semibold px-7 py-3.5 rounded transition-colors duration-200 text-sm"
+              className="inline-flex items-center gap-2 mt-10 bg-[#F7941D] hover:bg-[#E07810] text-white font-semibold px-7 py-3.5 rounded transition-colors duration-200 text-sm"
             >
               {t("nav.cta")}
             </a>

@@ -18,22 +18,22 @@ export default function FAQ() {
   ];
 
   return (
-    <section className="py-28 bg-[#0D1117]">
+    <section className="py-28 bg-[#0A0A0A]">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 mb-6">
-            <span className="w-8 h-px bg-[#E8631A]" />
-            <span className="text-[#E8631A] text-xs font-semibold tracking-[0.2em] uppercase">FAQ</span>
-            <span className="w-8 h-px bg-[#E8631A]" />
+            <span className="w-8 h-px bg-[#F7941D]" />
+            <span className="text-[#F7941D] text-xs font-semibold tracking-[0.2em] uppercase">FAQ</span>
+            <span className="w-8 h-px bg-[#F7941D]" />
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-white">{t("faq.title")}</h2>
+          <h2 className="text-5xl lg:text-6xl font-bold uppercase text-white">{t("faq.title")}</h2>
         </div>
 
         <div className="space-y-3">
           {faqs.map((faq, i) => (
             <div
               key={i}
-              className="border border-white/8 hover:border-[#E8631A]/30 rounded-xl overflow-hidden transition-all duration-300"
+              className="border border-white/8 hover:border-[#F7941D]/30 rounded-xl overflow-hidden transition-all duration-300"
             >
               <button
                 className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
@@ -41,7 +41,7 @@ export default function FAQ() {
               >
                 <span className="text-white font-semibold text-base">{faq.q}</span>
                 <span
-                  className={`text-[#E8631A] flex-shrink-0 transition-transform duration-300 ${open === i ? "rotate-45" : ""}`}
+                  className={`text-[#F7941D] flex-shrink-0 transition-transform duration-300 ${open === i ? "rotate-45" : ""}`}
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />

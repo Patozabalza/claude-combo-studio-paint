@@ -15,15 +15,15 @@ export default function Areas() {
   const { t } = useLanguage();
 
   return (
-    <section id="areas" className="py-28 bg-[#0D1117] relative overflow-hidden">
+    <section id="areas" className="py-28 bg-[#0A0A0A] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 mb-8">
-              <span className="w-8 h-px bg-[#E8631A]" />
-              <span className="text-[#E8631A] text-xs font-semibold tracking-[0.2em] uppercase">Coverage</span>
+              <span className="w-8 h-px bg-[#F7941D]" />
+              <span className="text-[#F7941D] text-xs font-semibold tracking-[0.2em] uppercase">Coverage</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+            <h2 className="text-5xl lg:text-6xl font-bold uppercase text-white leading-tight mb-6">
               {t("areas.title")}
             </h2>
             <p className="text-white/55 text-lg font-light mb-10">
@@ -34,7 +34,7 @@ export default function Areas() {
               {areas.map((area) => (
                 <span
                   key={area}
-                  className="px-4 py-2 border border-white/10 hover:border-[#E8631A]/40 text-white/70 hover:text-white text-sm rounded-full transition-all duration-200 cursor-default"
+                  className="px-4 py-2 border border-white/10 hover:border-[#F7941D]/40 text-white/70 hover:text-white text-sm rounded-full transition-all duration-200 cursor-default"
                 >
                   {area}
                 </span>
@@ -50,10 +50,10 @@ export default function Areas() {
               className="object-cover"
               quality={80}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0D1117]/60 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 bg-[#0D1117]/80 backdrop-blur border border-white/10 rounded-xl p-5">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6 bg-[#0A0A0A]/80 backdrop-blur border border-white/10 rounded-xl p-5">
               <div className="flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full bg-[#E8631A] animate-pulse" />
+                <div className="w-3 h-3 rounded-full bg-[#F7941D] animate-pulse" />
                 <span className="text-white font-semibold">Miami-Dade County</span>
               </div>
               <p className="text-white/60 text-sm mt-1">Full coverage · All neighborhoods</p>

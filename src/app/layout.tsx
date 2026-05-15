@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,11 +8,18 @@ const inter = Inter({
   weight: ["300", "400", "500", "600", "700"],
 });
 
+const barlow = Barlow_Condensed({
+  variable: "--font-barlow",
+  subsets: ["latin"],
+  weight: ["600", "700", "800"],
+});
+
 export const metadata: Metadata = {
-  title: "Combo Studio Paint | Premium Painting & Color Design Miami",
-  description: "Premium painting and color design solutions for residential and commercial spaces across Miami-Dade County. Interior, exterior, luxury homes, condos, HOA, commercial projects.",
+  title: "Combo Studio Paint | #1 Premium Painting Company Miami-Dade",
+  description: "Combo Studio Paint — Miami's premium painting and color design studio. Interior & exterior painting, luxury homes, condos, HOA, commercial spaces. Serving all Miami-Dade County. Call +1 (305) 542-6364.",
   keywords: [
     "premium painting company Miami",
+    "painting company Miami-Dade",
     "residential painting Miami",
     "commercial painting Miami",
     "luxury home painting Miami",
@@ -20,12 +27,22 @@ export const metadata: Metadata = {
     "exterior painting Miami",
     "painting contractors Miami-Dade",
     "color consultation Miami",
+    "HOA painting Miami",
+    "condo painting Miami",
     "painting company Coral Gables",
     "painting company Doral",
+    "painting company Miami Beach",
+    "painting company Kendall",
+    "painting company Aventura",
+    "painting company Pinecrest",
     "empresa de pintura en Miami",
     "pintores profesionales en Miami",
     "pintura residencial Miami",
     "pintura comercial Miami",
+    "pintura interior Miami",
+    "pintura exterior Miami",
+    "pintores Miami-Dade",
+    "combo studio paint",
   ],
   authors: [{ name: "Combo Studio Paint" }],
   creator: "Combo Studio Paint",
@@ -75,7 +92,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} scroll-smooth`}>
+    <html lang="en" className={`${inter.variable} ${barlow.variable} scroll-smooth`}>
       <head>
         <script
           type="application/ld+json"
