@@ -31,8 +31,8 @@ export default function Contact() {
     }
   };
 
-  const inputClass = "w-full bg-transparent border-0 border-b border-[#D9CBB8] focus:border-[#E77B00] text-[#1F1F1F] placeholder-[#5B3A29]/30 py-3 text-sm outline-none transition-colors duration-200 font-light";
-  const labelClass = "block text-[#5B3A29]/50 text-[10px] font-semibold tracking-[0.2em] uppercase mb-1";
+  const inputClass = "w-full bg-transparent border-0 border-b border-[#F4F0E8]/20 focus:border-[#E77B00] text-[#F4F0E8] placeholder-[#F4F0E8]/30 py-3 text-sm outline-none transition-colors duration-200 font-light";
+  const labelClass = "block text-[#F4F0E8]/50 text-[10px] font-semibold tracking-[0.2em] uppercase mb-1";
 
   return (
     <section id="contact" className="py-28 lg:py-40 bg-[#1F1F1F]">
@@ -127,7 +127,7 @@ export default function Contact() {
                   <div className="grid sm:grid-cols-2 gap-8">
                     <div>
                       <label className={labelClass}>{t("contact.type")}</label>
-                      <select name="type" value={form.type} onChange={handleChange} className={`${inputClass} bg-[#1F1F1F]`}>
+                      <select name="type" value={form.type} onChange={handleChange} className={`${inputClass} bg-[#1F1F1F] [&>option]:bg-[#1F1F1F] [&>option]:text-[#F4F0E8]`}>
                         <option value="">—</option>
                         <option value="Residential">{t("contact.typeRes")}</option>
                         <option value="Commercial">{t("contact.typeCom")}</option>
@@ -139,7 +139,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <label className={labelClass}>{t("contact.method")}</label>
-                      <select name="method" value={form.method} onChange={handleChange} className={`${inputClass} bg-[#1F1F1F]`}>
+                      <select name="method" value={form.method} onChange={handleChange} className={`${inputClass} bg-[#1F1F1F] [&>option]:bg-[#1F1F1F] [&>option]:text-[#F4F0E8]`}>
                         <option value="">—</option>
                         <option value="Call">{t("contact.methodCall")}</option>
                         <option value="WhatsApp">{t("contact.methodWA")}</option>
