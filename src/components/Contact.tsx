@@ -19,16 +19,18 @@ export default function Contact() {
     e.preventDefault();
     setStatus("sending");
     try {
-      const body = new URLSearchParams({
-        "form-name": "contact",
-        ...form,
-      });
-      const res = await fetch("/", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: body.toString(),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: "cc717448-45a7-496e-b7ef-ef3c26e34200",
+          subject: `New quote request — ${form.type || "General"} | Combo Studio Paint`,
+          from_name: "Combo Studio Paint Web",
+          ...form,
+        }),
       });
-      if (res.ok) {
+      const data = await res.json();
+      if (data.success) {
         setStatus("success");
         setForm({ name: "", phone: "", email: "", type: "", service: "", location: "", message: "", method: "" });
       } else {
