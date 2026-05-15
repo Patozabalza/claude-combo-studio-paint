@@ -58,7 +58,7 @@ export default function Areas() {
           {/* Image */}
           <div className="relative h-[480px] lg:h-auto overflow-hidden">
             <Image
-              src="/images/pintor/20.png"
+              src="/images/pintor/36.png"
               alt="Combo Studio Paint - Miami-Dade Coverage"
               fill
               className="object-cover"
