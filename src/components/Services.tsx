@@ -1,12 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Services() {
   const { t } = useLanguage();
   const [tab, setTab] = useState<"residential" | "commercial">("residential");
+  const [lightbox, setLightbox] = useState<string | null>(null);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setLightbox(null); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const residential = [
     t("residential.s1"), t("residential.s2"), t("residential.s3"),
@@ -84,43 +91,61 @@ export default function Services() {
 
           {/* Images — clean 2×2 grid */}
           <div className="grid grid-cols-2 gap-3">
-            <div className="relative h-72 overflow-hidden">
-              <Image
-                src={tab === "residential" ? "/images/pintor/5.png" : "/images/pintor/15.png"}
-                alt="Painting service"
-                fill
-                className="object-cover transition-transform duration-700 hover:scale-105"
-                quality={80}
-              />
-            </div>
-            <div className="relative h-72 overflow-hidden">
-              <Image
-                src={tab === "residential" ? "/images/proyectos/1.png" : "/images/proyectos/5.png"}
-                alt="Premium result"
-                fill
-                className="object-cover transition-transform duration-700 hover:scale-105"
-                quality={80}
-              />
-            </div>
-            <div className="relative h-72 overflow-hidden">
-              <Image
-                src={tab === "residential" ? "/images/pintor/20.png" : "/images/pintor/10.png"}
-                alt="Professional service"
-                fill
-                className="object-cover transition-transform duration-700 hover:scale-105"
-                quality={80}
-              />
-            </div>
-            <div className="relative h-72 overflow-hidden">
-              <Image
-                src={tab === "residential" ? "/images/proyectos/4.png" : "/images/proyectos/2.png"}
-                alt="Finished project"
-                fill
-                className="object-cover transition-transform duration-700 hover:scale-105"
-                quality={80}
-              />
-            </div>
+            {[
+              tab === "residential" ? "/images/pintor/5.png" : "/images/pintor/15.png",
+              tab === "residential" ? "/images/proyectos/1.png" : "/images/proyectos/5.png",
+              tab === "residential" ? "/images/pintor/20.png" : "/images/pintor/10.png",
+              tab === "residential" ? "/images/proyectos/4.png" : "/images/proyectos/2.png",
+            ].map((src, i) => (
+              <div
+                key={i}
+                className="relative h-72 overflow-hidden cursor-zoom-in group"
+                onClick={() => setLightbox(src)}
+              >
+                <Image
+                  src={src}
+                  alt="Painting project"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  quality={80}
+                />
+                <div className="absolute inset-0 bg-[#1F1F1F]/0 group-hover:bg-[#1F1F1F]/20 transition-colors duration-300 flex items-center justify-center">
+                  <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  </svg>
+                </div>
+              </div>
+            ))}
           </div>
+
+          {/* Lightbox */}
+          {lightbox && (
+            <div
+              className="fixed inset-0 z-50 bg-[#1F1F1F]/95 flex items-center justify-center p-6"
+              onClick={() => setLightbox(null)}
+            >
+              <button
+                className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors"
+                onClick={() => setLightbox(null)}
+              >
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+              <div
+                className="relative w-full max-w-5xl max-h-[85vh] aspect-video"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <Image
+                  src={lightbox}
+                  alt="Project detail"
+                  fill
+                  className="object-contain"
+                  quality={95}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
