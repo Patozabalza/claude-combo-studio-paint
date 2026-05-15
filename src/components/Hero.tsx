@@ -30,8 +30,6 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#1A1208]/80 via-transparent to-transparent" />
       </div>
 
-      {/* Bottom fade to match TrustBar/next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#F4F0E8] to-transparent z-10" />
 
       {/* Content */}
       <div className="relative z-20 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-36 w-full">
