@@ -22,28 +22,28 @@ export default function BeforeAfter() {
   const { t, lang } = useLanguage();
 
   return (
-    <section id="before-after" className="py-24 lg:py-32 bg-[#F4F0E8]">
+    <section id="before-after" className="py-28 lg:py-40 bg-[#F4F0E8]">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 mb-6">
-            <span className="w-8 h-px bg-[#E77B00]" />
-            <span className="text-[#E77B00] text-xs font-semibold tracking-[0.2em] uppercase">Before & After</span>
-            <span className="w-8 h-px bg-[#E77B00]" />
+        <div className="max-w-2xl mx-auto text-center mb-20">
+          <div className="inline-flex items-center gap-3 mb-6">
+            <span className="w-10 h-px bg-[#E77B00]" />
+            <span className="text-[#E77B00] text-xs font-medium tracking-[0.25em] uppercase">Before & After</span>
+            <span className="w-10 h-px bg-[#E77B00]" />
           </div>
-          <h2 className="text-5xl lg:text-6xl font-semibold text-[#1F1F1F] mb-4 max-w-2xl mx-auto">
+          <h2 className="text-5xl lg:text-6xl font-semibold text-[#1F1F1F] mb-6">
             {t("ba.title")}
           </h2>
-          <p className="text-[#5B3A29]/65 text-lg font-light max-w-xl mx-auto">
+          <p className="text-[#5B3A29]/65 text-lg font-light leading-relaxed">
             {t("ba.sub")}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-12">
           {projects.map((project, i) => (
-            <div key={i} className="space-y-3">
-              <div className="grid grid-cols-2 gap-3">
+            <div key={i} className="space-y-4">
+              <div className="grid grid-cols-2 gap-2">
                 <div className="relative">
-                  <div className="relative h-64 rounded-xl overflow-hidden shadow-md">
+                  <div className="relative h-72 overflow-hidden">
                     <Image
                       src={project.before}
                       alt="Before"
@@ -51,14 +51,14 @@ export default function BeforeAfter() {
                       className="object-cover grayscale"
                       quality={75}
                     />
-                    <div className="absolute inset-0 bg-[#1F1F1F]/30" />
+                    <div className="absolute inset-0 bg-[#1F1F1F]/25" />
                   </div>
-                  <div className="absolute top-3 left-3 bg-[#1F1F1F]/80 backdrop-blur text-white text-xs font-semibold px-3 py-1.5 rounded tracking-widest uppercase">
+                  <div className="absolute top-0 left-0 bg-[#1F1F1F] text-white text-[10px] font-semibold px-3 py-1.5 tracking-[0.2em] uppercase">
                     {t("ba.before")}
                   </div>
                 </div>
                 <div className="relative">
-                  <div className="relative h-64 rounded-xl overflow-hidden shadow-md">
+                  <div className="relative h-72 overflow-hidden">
                     <Image
                       src={project.after}
                       alt="After"
@@ -67,12 +67,12 @@ export default function BeforeAfter() {
                       quality={75}
                     />
                   </div>
-                  <div className="absolute top-3 right-3 bg-[#E77B00] text-white text-xs font-semibold px-3 py-1.5 rounded tracking-widest uppercase">
+                  <div className="absolute top-0 right-0 bg-[#E77B00] text-white text-[10px] font-semibold px-3 py-1.5 tracking-[0.2em] uppercase">
                     {t("ba.after")}
                   </div>
                 </div>
               </div>
-              <p className="text-[#5B3A29]/60 text-sm font-medium text-center tracking-wide">
+              <p className="text-[#5B3A29]/40 text-xs font-medium text-center tracking-[0.15em] uppercase">
                 {lang === "es" ? project.labelEs : project.label}
               </p>
             </div>
