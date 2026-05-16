@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import Image from "next/image";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Header() {
@@ -28,15 +28,21 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-[#0D1117]/95 backdrop-blur-md border-b border-white/5 py-3"
+          ? "bg-[#F4F0E8]/97 backdrop-blur-md border-b border-[#D9CBB8] py-3"
           : "bg-transparent py-5"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex flex-col leading-none">
-          <span className="text-white font-bold text-xl tracking-tight">COMBO</span>
-          <span className="text-[#E8631A] font-bold text-xl tracking-tight">STUDIO PAINT</span>
+        <a href="#" className="flex items-center">
+          <Image
+            src="/logo.png"
+            alt="Combo Studio Paint"
+            width={120}
+            height={80}
+            className="h-11 w-auto object-contain"
+            priority
+          />
         </a>
 
         {/* Desktop Nav */}
@@ -45,7 +51,11 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-white/70 hover:text-white text-sm font-medium transition-colors duration-200 tracking-wide"
+              className={`text-sm font-medium transition-colors duration-200 tracking-wide ${
+                scrolled
+                  ? "text-[#5B3A29]/80 hover:text-[#1F1F1F]"
+                  : "text-white/80 hover:text-white"
+              }`}
             >
               {link.label}
             </a>
@@ -57,7 +67,11 @@ export default function Header() {
           {/* Language switcher */}
           <button
             onClick={() => setLang(lang === "en" ? "es" : "en")}
-            className="text-white/60 hover:text-white text-sm font-medium tracking-widest transition-colors border border-white/20 hover:border-white/40 px-3 py-1.5 rounded"
+            className={`text-sm font-medium tracking-widest transition-colors px-3 py-1.5 rounded border ${
+              scrolled
+                ? "text-[#5B3A29]/70 hover:text-[#1F1F1F] border-[#D9CBB8] hover:border-[#5B3A29]"
+                : "text-white/70 hover:text-white border-white/30 hover:border-white/60"
+            }`}
           >
             {lang === "en" ? "ES" : "EN"}
           </button>
@@ -65,7 +79,7 @@ export default function Header() {
           {/* CTA */}
           <a
             href="#contact"
-            className="bg-[#E8631A] hover:bg-[#d45515] text-white text-sm font-semibold px-5 py-2.5 rounded transition-colors duration-200 tracking-wide"
+            className="bg-[#E77B00] hover:bg-[#C96900] text-white text-sm font-semibold px-5 py-2.5 rounded transition-colors duration-200 tracking-wide"
           >
             {t("nav.cta")}
           </a>
@@ -73,14 +87,14 @@ export default function Header() {
 
         {/* Mobile menu button */}
         <button
-          className="lg:hidden text-white p-2"
+          className={`lg:hidden p-2 ${scrolled ? "text-[#1F1F1F]" : "text-white"}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
           <div className="space-y-1.5">
-            <span className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block h-0.5 w-6 bg-white transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            <span className={`block h-0.5 w-6 transition-all duration-300 ${scrolled ? "bg-[#1F1F1F]" : "bg-white"} ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block h-0.5 w-6 transition-all duration-300 ${scrolled ? "bg-[#1F1F1F]" : "bg-white"} ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block h-0.5 w-6 transition-all duration-300 ${scrolled ? "bg-[#1F1F1F]" : "bg-white"} ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
           </div>
         </button>
       </div>
@@ -91,13 +105,13 @@ export default function Header() {
           menuOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="bg-[#0D1117]/98 backdrop-blur-md border-t border-white/10 px-6 py-6 space-y-4">
+        <div className="bg-[#F4F0E8] border-t border-[#D9CBB8] px-6 py-6 space-y-4">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className="block text-white/80 hover:text-white text-base font-medium py-2 border-b border-white/5 transition-colors"
+              className="block text-[#5B3A29] hover:text-[#1F1F1F] text-base font-medium py-2 border-b border-[#D9CBB8]/60 transition-colors"
             >
               {link.label}
             </a>
@@ -105,14 +119,14 @@ export default function Header() {
           <div className="flex items-center gap-4 pt-4">
             <button
               onClick={() => setLang(lang === "en" ? "es" : "en")}
-              className="text-white/60 hover:text-white text-sm font-medium border border-white/20 px-3 py-1.5 rounded transition-colors"
+              className="text-[#5B3A29] hover:text-[#1F1F1F] text-sm font-medium border border-[#D9CBB8] px-3 py-1.5 rounded transition-colors"
             >
               {lang === "en" ? "ES" : "EN"}
             </button>
             <a
               href="#contact"
               onClick={() => setMenuOpen(false)}
-              className="flex-1 text-center bg-[#E8631A] hover:bg-[#d45515] text-white text-sm font-semibold px-5 py-2.5 rounded transition-colors"
+              className="flex-1 text-center bg-[#E77B00] hover:bg-[#C96900] text-white text-sm font-semibold px-5 py-2.5 rounded transition-colors"
             >
               {t("nav.cta")}
             </a>

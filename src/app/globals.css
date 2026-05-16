@@ -1,49 +1,66 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-brand-black: #0D1117;
-  --color-brand-charcoal: #181818;
+  --color-brand-ivory: #F4F0E8;
   --color-brand-white: #FFFFFF;
-  --color-brand-sand: #E6E3DD;
-  --color-brand-stone: #B8AFA4;
-  --color-brand-concrete: #D8D3CB;
-  --color-brand-ocean: #003B5C;
-  --color-brand-leaf: #1D6B5F;
-  --color-brand-orange: #E8631A;
-  --color-brand-gold: #D4AF37;
-  --font-sans: var(--font-inter);
+  --color-brand-sand: #D9CBB8;
+  --color-brand-espresso: #5B3A29;
+  --color-brand-charcoal: #1F1F1F;
+  --color-brand-orange: #E77B00;
+  --color-brand-orange-dark: #C96900;
+  --font-sans: var(--font-montserrat);
+  --font-display: var(--font-cormorant);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
 
-html {
-  scroll-behavior: smooth;
-}
+  body {
+    background: #F4F0E8;
+    color: #5B3A29;
+    font-family: var(--font-montserrat), 'Montserrat', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.6;
+  }
 
-body {
-  background: #0D1117;
-  color: #FFFFFF;
-  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  h1, h2, h3, h4 {
+    font-family: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    font-optical-sizing: auto;
+  }
 
-::selection {
-  background: #E8631A;
-  color: #FFFFFF;
-}
+  h1 {
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
 
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: #0D1117;
-}
-::-webkit-scrollbar-thumb {
-  background: #E8631A;
-  border-radius: 2px;
+  h2 {
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  ::selection {
+    background: #E77B00;
+    color: #FFFFFF;
+  }
+
+  ::-webkit-scrollbar { width: 2px; }
+  ::-webkit-scrollbar-track { background: #F4F0E8; }
+  ::-webkit-scrollbar-thumb { background: #E77B00; border-radius: 2px; }
+
+  section {
+    position: relative;
+  }
 }
