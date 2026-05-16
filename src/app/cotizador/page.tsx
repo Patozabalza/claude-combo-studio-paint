@@ -60,7 +60,7 @@ const T = {
     paymentTerms: "Payment Terms", additionalConditions: "Additional Conditions",
     addCondition: "+ Add condition", authorizedBy: "Authorized By",
     clientSignature: "Client Signature", dateLbl: "Date",
-    print: "Download PDF", generating: "Generating…", close: "Close", margin: "Margin",
+    print: "Print / PDF", generating: "Opening…", close: "Close", margin: "Margin",
     editConditions: "Edit Conditions", doneEditing: "Done",
     proposalNote: "This proposal is valid for the period stated above. All prices are subject to on-site verification.",
     confidential: "Internal · Confidential", acceptance: "Acceptance",
@@ -95,7 +95,7 @@ const T = {
     paymentTerms: "Forma de Pago", additionalConditions: "Condiciones Adicionales",
     addCondition: "+ Agregar condición", authorizedBy: "Autorizado Por",
     clientSignature: "Firma del Cliente", dateLbl: "Fecha",
-    print: "Descargar PDF", generating: "Generando…", close: "Cerrar", margin: "Margen",
+    print: "Imprimir / PDF", generating: "Abriendo…", close: "Cerrar", margin: "Margen",
     editConditions: "Editar Condiciones", doneEditing: "Listo",
     proposalNote: "Esta propuesta tiene la validez indicada arriba. Todos los precios están sujetos a verificación en sitio.",
     confidential: "Interno · Confidencial", acceptance: "Aceptación",
@@ -264,69 +264,64 @@ function ProposalView({ projectName, clientName, city, calc, controls, customIte
   const today = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   const proposalNum = `CSP-${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, "0")}${String(new Date().getDate()).padStart(2, "0")}`;
 
-  const downloadPDF = async () => {
-    const element = document.getElementById("proposal-doc");
-    if (!element) return;
-    setGenerating(true);
-    try {
-      const { default: html2canvas } = await import("html2canvas");
-      const { default: jsPDF }       = await import("jspdf");
+  const downloadPDF = () => {
+    const proposal = document.getElementById("proposal-doc");
+    if (!proposal) return;
 
-      // Scroll the modal to top so the full doc is visible for capture
-      const overlay = element.closest(".overflow-y-auto") as HTMLElement | null;
-      if (overlay) overlay.scrollTop = 0;
-      await new Promise(r => setTimeout(r, 80)); // let scroll settle
-
-      const canvas = await html2canvas(element, {
-        scale: 2,
-        useCORS: true,
-        allowTaint: false,   // must be false — true taints the canvas and blocks toDataURL()
-        backgroundColor: "#F4F0E8",
-        logging: false,
-        scrollX: 0,
-        scrollY: 0,
-        onclone: (_doc: Document, el: HTMLElement) => {
-          // Remove overflow clipping so full height is captured
-          el.style.overflow = "visible";
-          el.style.maxHeight = "none";
-          // Replace Next.js-transformed image URLs with direct /logo.png so html2canvas can load them
-          el.querySelectorAll("img").forEach((img) => {
-            const src = img.getAttribute("src") ?? "";
-            if (src.startsWith("/_next/image")) {
-              try {
-                const real = new URL(src, window.location.origin).searchParams.get("url");
-                if (real) img.src = decodeURIComponent(real);
-              } catch { /* keep original */ }
-            }
-          });
-        },
-      });
-
-      const imgData = canvas.toDataURL("image/jpeg", 0.92);
-      const pdf     = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-      const pageW   = pdf.internal.pageSize.getWidth();
-      const pageH   = pdf.internal.pageSize.getHeight();
-      const imgW    = pageW;
-      const imgH    = (canvas.height * pageW) / canvas.width;
-      let   left    = imgH;
-      let   pos     = 0;
-
-      pdf.addImage(imgData, "JPEG", 0, pos, imgW, imgH);
-      left -= pageH;
-      while (left > 0) {
-        pos -= pageH;
-        pdf.addPage();
-        pdf.addImage(imgData, "JPEG", 0, pos, imgW, imgH);
-        left -= pageH;
-      }
-
-      const slug = (projectName || "Proposal").replace(/\s+/g, "-").slice(0, 30);
-      pdf.save(`${slug}-CSP-${new Date().toISOString().slice(0, 10)}.pdf`);
-    } catch (err) {
-      console.error("PDF generation failed:", err);
-    } finally {
-      setGenerating(false);
+    // Open blank window NOW — synchronous within the click event so popup blocker won't fire
+    const win = window.open("", "_blank");
+    if (!win) {
+      alert("Por favor permite ventanas emergentes para este sitio.\nPlease allow popups for this site.");
+      return;
     }
+
+    setGenerating(true);
+
+    // Collect Next.js compiled CSS from the current page
+    const cssLinks = Array.from(
+      document.head.querySelectorAll<HTMLLinkElement>('link[rel="stylesheet"]')
+    )
+      .map(l => l.href)
+      .filter(h => h && !h.includes("fonts.googleapis.com"))
+      .map(h => `<link rel="stylesheet" href="${h}">`)
+      .join("\n");
+
+    // Make relative image src values absolute so they load in the new window
+    const proposalHtml = proposal.outerHTML
+      .replace(/ src="(\/[^"]+)"/g, ` src="${window.location.origin}$1"`);
+
+    win.document.write(`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  ${cssLinks}
+  <style>
+    :root { --font-montserrat: 'Montserrat', sans-serif; --font-cormorant: 'Cormorant Garamond', serif; }
+    *, *::before, *::after { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    @page { margin: 0; size: A4 portrait; }
+    html, body { margin: 0; padding: 0; background: #F4F0E8; }
+  </style>
+</head>
+<body>
+  ${proposalHtml}
+  <script>
+    document.fonts.ready.then(function() {
+      var imgs = Array.from(document.images);
+      Promise.all(imgs.map(function(img) {
+        return img.complete ? Promise.resolve() : new Promise(function(r) { img.onload = r; img.onerror = r; });
+      })).then(function() {
+        setTimeout(function() { window.print(); }, 400);
+      });
+    });
+  <\/script>
+</body>
+</html>`);
+
+    win.document.close();
+    setTimeout(() => setGenerating(false), 800);
   };
 
   const updateExtraTerm = (idx: number, val: string) => {
