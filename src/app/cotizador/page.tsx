@@ -272,28 +272,47 @@ function ProposalView({ projectName, clientName, city, calc, controls, customIte
       const { default: html2canvas } = await import("html2canvas");
       const { default: jsPDF }       = await import("jspdf");
 
+      // Scroll the modal to top so the full doc is visible for capture
+      const overlay = element.closest(".overflow-y-auto") as HTMLElement | null;
+      if (overlay) overlay.scrollTop = 0;
+      await new Promise(r => setTimeout(r, 80)); // let scroll settle
+
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
-        allowTaint: true,
+        allowTaint: false,   // must be false — true taints the canvas and blocks toDataURL()
         backgroundColor: "#F4F0E8",
         logging: false,
-        windowWidth: element.scrollWidth,
-        windowHeight: element.scrollHeight,
+        scrollX: 0,
+        scrollY: 0,
+        onclone: (_doc: Document, el: HTMLElement) => {
+          // Remove overflow clipping so full height is captured
+          el.style.overflow = "visible";
+          el.style.maxHeight = "none";
+          // Replace Next.js-transformed image URLs with direct /logo.png so html2canvas can load them
+          el.querySelectorAll("img").forEach((img) => {
+            const src = img.getAttribute("src") ?? "";
+            if (src.startsWith("/_next/image")) {
+              try {
+                const real = new URL(src, window.location.origin).searchParams.get("url");
+                if (real) img.src = decodeURIComponent(real);
+              } catch { /* keep original */ }
+            }
+          });
+        },
       });
 
-      const imgData  = canvas.toDataURL("image/jpeg", 0.95);
-      const pdf      = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
-      const pageW    = pdf.internal.pageSize.getWidth();
-      const pageH    = pdf.internal.pageSize.getHeight();
-      const imgW     = pageW;
-      const imgH     = (canvas.height * pageW) / canvas.width;
-      let   left     = imgH;
-      let   pos      = 0;
+      const imgData = canvas.toDataURL("image/jpeg", 0.92);
+      const pdf     = new jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
+      const pageW   = pdf.internal.pageSize.getWidth();
+      const pageH   = pdf.internal.pageSize.getHeight();
+      const imgW    = pageW;
+      const imgH    = (canvas.height * pageW) / canvas.width;
+      let   left    = imgH;
+      let   pos     = 0;
 
       pdf.addImage(imgData, "JPEG", 0, pos, imgW, imgH);
       left -= pageH;
-
       while (left > 0) {
         pos -= pageH;
         pdf.addPage();
@@ -303,6 +322,8 @@ function ProposalView({ projectName, clientName, city, calc, controls, customIte
 
       const slug = (projectName || "Proposal").replace(/\s+/g, "-").slice(0, 30);
       pdf.save(`${slug}-CSP-${new Date().toISOString().slice(0, 10)}.pdf`);
+    } catch (err) {
+      console.error("PDF generation failed:", err);
     } finally {
       setGenerating(false);
     }
@@ -346,7 +367,8 @@ function ProposalView({ projectName, clientName, city, calc, controls, customIte
 
         {/* ── Header ── */}
         <div className="px-12 pt-10 pb-8 flex justify-between items-start">
-          <Image src="/logo.png" alt="Combo Studio Paint" width={140} height={90} className="object-contain object-left" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="Combo Studio Paint" width={140} height={90} style={{ objectFit: "contain", objectPosition: "left" }} />
           <div className="text-right mt-1">
             <div className="text-[9px] text-[#5B3A29]/40 uppercase tracking-[0.35em] mb-1.5">Proposal</div>
             <div className="text-[#5B3A29] text-sm font-semibold">{proposalNum}</div>
@@ -564,7 +586,8 @@ function ProposalView({ projectName, clientName, city, calc, controls, customIte
         {/* ── Footer ── */}
         <div className="border-t-2 border-[#E77B00] bg-[#5B3A29] px-12 py-6 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Image src="/logo.png" alt="Combo Studio Paint" width={70} height={45} className="object-contain brightness-0 invert opacity-80" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.png" alt="Combo Studio Paint" width={70} height={45} style={{ objectFit: "contain", filter: "brightness(0) invert(1)", opacity: 0.8 }} />
             <div className="w-px h-8 bg-white/10" />
             <div>
               <div className="text-white/70 text-[9px] uppercase tracking-[0.3em]">combostudiopaint.com</div>
