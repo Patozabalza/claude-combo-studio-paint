@@ -396,6 +396,20 @@ const FIELD_LABEL: Record<keyof SlideTexts, string> = {
   labelLeft: "Label Left", labelRight: "Label Right",
 };
 
+// Converts any image src to a base64 data URL so html2canvas
+// can render it without CORS restrictions in production.
+async function imageToDataURL(src: string): Promise<string> {
+  if (src.startsWith("data:")) return src;
+  const res = await fetch(src);
+  const blob = await res.blob();
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
 // ─── Main Page ─────────────────────────────────────────────────────────────
 function buildSlideMap(themes: Theme[]) {
   const m: Record<string, Record<string, Slide>> = {};
@@ -449,30 +463,50 @@ export default function SocialPage() {
     const el = slideRefs.current[slide.id];
     if (!el) return;
     setDownloading(slide.id);
+
+    // Snapshot current img srcs before we swap them
+    const imgs = Array.from(el.querySelectorAll<HTMLImageElement>("img"));
+    const origSrcs = imgs.map(img => img.src);
+
     try {
       await document.fonts.ready;
+
+      // Convert every img src to a data URL — prevents canvas taint in production
+      // (Netlify doesn't return CORS headers on static files, so useCORS would blank the images)
+      await Promise.all(imgs.map(async img => {
+        try { img.src = await imageToDataURL(img.src); } catch { /* keep original on fetch error */ }
+      }));
+
       const html2canvas = (await import("html2canvas")).default;
       const canvas = await html2canvas(el, {
         scale: 3,
-        useCORS: true,
+        useCORS: false,
         allowTaint: false,
         width: 360,
         height: 640,
         backgroundColor: null,
         logging: false,
       });
-      canvas.toBlob(blob => {
-        if (!blob) return;
-        const url = URL.createObjectURL(blob);
-        const a   = document.createElement("a");
-        a.href     = url;
-        a.download = `combo-${activeTheme}-slide-0${index + 1}.jpg`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      }, "image/jpeg", 0.95);
+
+      await new Promise<void>((resolve, reject) => {
+        canvas.toBlob(blob => {
+          if (!blob) { reject(new Error("toBlob returned null")); return; }
+          const url = URL.createObjectURL(blob);
+          const a   = document.createElement("a");
+          a.href     = url;
+          a.download = `combo-${activeTheme}-slide-0${index + 1}.jpg`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          resolve();
+        }, "image/jpeg", 0.95);
+      });
+    } catch (err) {
+      console.error("Slide download failed:", err);
     } finally {
+      // Restore original srcs and clear spinner no matter what
+      imgs.forEach((img, i) => { img.src = origSrcs[i]; });
       setDownloading(null);
     }
   }, [activeTheme]);
