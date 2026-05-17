@@ -2,7 +2,7 @@
 
 import { useState, useRef, useCallback } from "react";
 import {
-  THEMES, THEMES_ES, SLIDE_FIELDS, ALL_PINTOR, ALL_PROJECTS,
+  CAMPAIGNS, SLIDE_FIELDS, ALL_PINTOR, ALL_PROJECTS,
   ThemeKey, Theme, Slide, SlideTexts, SlideType,
 } from "@/lib/social-data";
 
@@ -10,40 +10,44 @@ type Lang = "en" | "es";
 
 const UI = {
   en: {
-    title:       "Social Media Generator",
-    downloadAll: "Download All 5",
-    formatNote:  "Stories / TikTok · 1080 × 1920 px · 9:16 · JPG",
-    editSlide:   "Edit Slide",
-    layout:      "Layout",
-    photos:      "Photos",
-    mainPhoto:   "Main Photo",
-    secondPhoto: "Second Photo (After)",
-    download:    "Download this slide",
-    clickEdit:   "Click a slide to edit",
-    change:      "Change →",
-    picker:      "Select Photo",
-    pintor:      "Painters — 36 photos",
-    projects:    "Projects — 9 photos",
-    myPhotos:    "My Uploaded Photos",
-    upload:      "+ Upload from device",
+    title:        "Social Media Generator",
+    downloadAll:  "Download All 5",
+    formatNote:   "Stories / TikTok · 1080 × 1920 px · 9:16 · JPG",
+    editSlide:    "Edit Slide",
+    layout:       "Layout",
+    photos:       "Photos",
+    mainPhoto:    "Main Photo",
+    secondPhoto:  "Second Photo (After)",
+    download:     "Download this slide",
+    clickEdit:    "Click a slide to edit",
+    change:       "Change →",
+    picker:       "Select Photo",
+    pintor:       "Painters — 36 photos",
+    projects:     "Projects — 9 photos",
+    myPhotos:     "My Uploaded Photos",
+    upload:       "+ Upload from device",
+    newProposal:  "New Proposal",
+    proposal:     "Proposal",
   },
   es: {
-    title:       "Generador de Contenido",
-    downloadAll: "Descargar 5 slides",
-    formatNote:  "Historias / TikTok · 1080 × 1920 px · 9:16 · JPG",
-    editSlide:   "Editar Slide",
-    layout:      "Diseño",
-    photos:      "Fotos",
-    mainPhoto:   "Foto Principal",
-    secondPhoto: "Segunda Foto (Después)",
-    download:    "Descargar este slide",
-    clickEdit:   "Haz clic en un slide para editar",
-    change:      "Cambiar →",
-    picker:      "Seleccionar Foto",
-    pintor:      "Pintores — 36 fotos",
-    projects:    "Proyectos — 9 fotos",
-    myPhotos:    "Mis Fotos Subidas",
-    upload:      "+ Subir desde dispositivo",
+    title:        "Generador de Contenido",
+    downloadAll:  "Descargar 5 slides",
+    formatNote:   "Historias / TikTok · 1080 × 1920 px · 9:16 · JPG",
+    editSlide:    "Editar Slide",
+    layout:       "Diseño",
+    photos:       "Fotos",
+    mainPhoto:    "Foto Principal",
+    secondPhoto:  "Segunda Foto (Después)",
+    download:     "Descargar este slide",
+    clickEdit:    "Haz clic en un slide para editar",
+    change:       "Cambiar →",
+    picker:       "Seleccionar Foto",
+    pintor:       "Pintores — 36 fotos",
+    projects:     "Proyectos — 9 fotos",
+    myPhotos:     "Mis Fotos Subidas",
+    upload:       "+ Subir desde dispositivo",
+    newProposal:  "Nueva Propuesta",
+    proposal:     "Propuesta",
   },
 };
 
@@ -415,23 +419,31 @@ function buildSlideMap(themes: Theme[]) {
   const m: Record<string, Record<string, Slide>> = {};
   themes.forEach(t => {
     m[t.key] = {};
-    t.slides.forEach(s => { m[t.key][s.id] = { ...s, texts: { ...s.texts } }; });
+    t.slides.forEach((s: Slide) => { m[t.key][s.id] = { ...s, texts: { ...s.texts } }; });
   });
   return m;
 }
 
+function campaignThemes(campaignIdx: number, lang: Lang): Theme[] {
+  const c = CAMPAIGNS[campaignIdx];
+  return lang === "en" ? c.themes : c.themesEs;
+}
+
 export default function SocialPage() {
-  const [lang,        setLang]        = useState<Lang>("en");
-  const [activeTheme, setActiveTheme] = useState<ThemeKey>("interior");
-  const [selectedId,  setSelectedId]  = useState<string>(THEMES[0].slides[0].id);
-  const [slideMap,    setSlideMap]    = useState<Record<string, Record<string, Slide>>>(() => buildSlideMap(THEMES));
-  const [pickerFor,   setPickerFor]   = useState<{ slideId: string; isAlt: boolean } | null>(null);
-  const [downloading,    setDownloading]    = useState<string | null>(null);
-  const [uploadedPhotos, setUploadedPhotos] = useState<string[]>([]);
+  // Pick a random campaign once on mount — all campaigns share the same slide ID structure
+  const initCampaign = useRef(Math.floor(Math.random() * CAMPAIGNS.length));
+  const [lang,           setLang]         = useState<Lang>("en");
+  const [campaignIdx,    setCampaignIdx]  = useState<number>(initCampaign.current);
+  const [activeTheme,    setActiveTheme]  = useState<ThemeKey>("interior");
+  const [selectedId,     setSelectedId]   = useState<string>(CAMPAIGNS[initCampaign.current].themes[0].slides[0].id);
+  const [slideMap,       setSlideMap]     = useState<Record<string, Record<string, Slide>>>(() => buildSlideMap(CAMPAIGNS[initCampaign.current].themes));
+  const [pickerFor,        setPickerFor]        = useState<{ slideId: string; isAlt: boolean } | null>(null);
+  const [downloading,      setDownloading]      = useState<string | null>(null);
+  const [uploadedPhotos,   setUploadedPhotos]   = useState<string[]>([]);
 
   const slideRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-  const currentThemes = lang === "en" ? THEMES : THEMES_ES;
+  const currentThemes = campaignThemes(campaignIdx, lang);
   const u             = UI[lang];
 
   const theme       = currentThemes.find(t => t.key === activeTheme)!;
@@ -520,14 +532,22 @@ export default function SocialPage() {
 
   const switchTheme = (key: ThemeKey) => {
     setActiveTheme(key);
-    setSelectedId(currentThemes.find(t => t.key === key)!.slides[0].id);
+    setSelectedId(currentThemes.find((t: Theme) => t.key === key)!.slides[0].id);
   };
 
   const switchLang = (l: Lang) => {
-    const themes = l === "en" ? THEMES : THEMES_ES;
+    const themes = campaignThemes(campaignIdx, l);
     setLang(l);
     setSlideMap(buildSlideMap(themes));
-    setSelectedId(themes.find(t => t.key === activeTheme)!.slides[0].id);
+    setSelectedId(themes.find((t: Theme) => t.key === activeTheme)!.slides[0].id);
+  };
+
+  const switchCampaign = () => {
+    const next = (campaignIdx + 1) % CAMPAIGNS.length;
+    const themes = campaignThemes(next, lang);
+    setCampaignIdx(next);
+    setSlideMap(buildSlideMap(themes));
+    setSelectedId(themes.find((t: Theme) => t.key === activeTheme)!.slides[0].id);
   };
 
   const fields = SLIDE_FIELDS[selected?.type as SlideType] ?? [];
@@ -565,6 +585,17 @@ export default function SocialPage() {
               </button>
             ))}
           </div>
+
+          {/* New Proposal */}
+          <button onClick={switchCampaign}
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-[#2a2a2a] hover:bg-[#333] border border-[#3a3a3a] text-[#F4F0E8]/55 hover:text-[#F4F0E8] text-[10px] font-semibold uppercase tracking-widest rounded transition-colors"
+            title={`${u.proposal} ${campaignIdx + 1} / ${CAMPAIGNS.length} — ${lang === "en" ? CAMPAIGNS[campaignIdx].label : CAMPAIGNS[campaignIdx].labelEs}`}>
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>
+            {u.newProposal}
+            <span className="opacity-40">{campaignIdx + 1}/{CAMPAIGNS.length}</span>
+          </button>
 
           {/* Download All */}
           <button onClick={downloadAll} disabled={!!downloading}
