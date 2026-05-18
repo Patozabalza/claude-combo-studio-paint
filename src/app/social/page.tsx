@@ -422,84 +422,77 @@ function AdSlide({ ad }: { ad: AdData }) {
   return (
     <div style={{ position: "relative", width: 360, height: 640, overflow: "hidden", backgroundColor: B.charcoal }}>
 
-      {/* Full-bleed photo */}
+      {/* Full-bleed photo — the star of the ad */}
       <BgImg src={ad.photo} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover" }} />
 
-      {/* Cinematic gradient: strong dark top → photo breathes → heavy dark bottom */}
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.35) 18%, rgba(0,0,0,.04) 32%, rgba(0,0,0,.04) 48%, rgba(0,0,0,.7) 64%, rgba(0,0,0,.97) 82%, #000 100%)" }} />
+      {/* Gradient: subtle dark top → photo fully visible 15–55% → heavy dark below */}
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.18) 12%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 44%, rgba(0,0,0,.55) 58%, rgba(0,0,0,.92) 74%, rgba(0,0,0,.99) 88%, #000 100%)" }} />
 
-      {/* Orange brand bar — top 3px */}
+      {/* Orange brand bar — top */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, backgroundColor: B.orange }} />
 
-      {/* ── HEADER: logo left · tagline right ── */}
-      <div style={{ position: "absolute", top: 18, left: 22, right: 22, display: "flex", alignItems: "center" }}>
-        <Logo h={40} op={0.95} inv={true} />
-        <div style={{ flex: 1 }} />
+      {/* ── HEADER: tagline left · LOGO RIGHT ── */}
+      <div style={{ position: "absolute", top: 16, left: 22, right: 20, display: "flex", alignItems: "center" }}>
         {ad.tagline && (
-          <div style={{ fontFamily: FB, fontSize: 6.5, color: B.orange, letterSpacing: "0.14em", textTransform: "uppercase" as const, fontWeight: 700, textAlign: "right" as const, lineHeight: 1.5 }}>
+          <div style={{ fontFamily: FB, fontSize: 6.5, color: B.orange, letterSpacing: "0.14em", textTransform: "uppercase" as const, fontWeight: 700, lineHeight: 1.5, maxWidth: 180 }}>
             {ad.tagline}
           </div>
         )}
+        <div style={{ flex: 1 }} />
+        <Logo h={38} op={0.92} inv={true} />
       </div>
 
-      {/* ── HEADLINE — editorial, starts at 38% height for photo breathing room ── */}
-      {/* overflow:visible so outer div clips at 360px, not inner container */}
-      <div style={{ position: "absolute", top: 212, left: 20, right: 0, overflow: "visible" }}>
+      {/* ── HEADLINE — lower half (55% down), photo fully breathes above ── */}
+      <div style={{ position: "absolute", top: 292, left: 20, right: 0 }}>
         {ad.headline1 && (
-          <div style={{ fontFamily: FD, fontSize: 80, fontWeight: 600, color: "#fff", lineHeight: 0.86, letterSpacing: "-0.025em", textTransform: "uppercase" as const }}>
+          <div style={{ fontFamily: FD, fontSize: 76, fontWeight: 600, color: "#fff", lineHeight: 0.87, letterSpacing: "-0.025em", textTransform: "uppercase" as const }}>
             {ad.headline1}
           </div>
         )}
         {ad.headline2 && (
-          <div style={{ fontFamily: FD, fontSize: 80, fontWeight: 600, color: B.orange, lineHeight: 0.86, letterSpacing: "-0.025em", textTransform: "uppercase" as const, marginTop: 6 }}>
+          <div style={{ fontFamily: FD, fontSize: 76, fontWeight: 600, color: B.orange, lineHeight: 0.87, letterSpacing: "-0.025em", textTransform: "uppercase" as const, marginTop: 5 }}>
             {ad.headline2}
           </div>
         )}
         {ad.subtitle && (
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 20, paddingRight: 22 }}>
-            <div style={{ width: 24, height: 2, backgroundColor: B.orange, flexShrink: 0 }} />
-            <div style={{ fontFamily: FB, fontSize: 9, fontWeight: 700, color: "rgba(255,255,255,.88)", letterSpacing: "0.3em", textTransform: "uppercase" as const }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 18, paddingRight: 22 }}>
+            <div style={{ width: 22, height: 2, backgroundColor: B.orange, flexShrink: 0 }} />
+            <div style={{ fontFamily: FB, fontSize: 8.5, fontWeight: 700, color: "rgba(255,255,255,.9)", letterSpacing: "0.3em", textTransform: "uppercase" as const }}>
               {ad.subtitle}
             </div>
           </div>
         )}
         {ad.body && (
-          <div style={{ fontFamily: FB, fontSize: 11.5, color: "rgba(255,255,255,.58)", lineHeight: 1.65, marginTop: 10, paddingRight: 22 }}>
+          <div style={{ fontFamily: FB, fontSize: 11, color: "rgba(255,255,255,.55)", lineHeight: 1.65, marginTop: 10, paddingRight: 22 }}>
             {ad.body}
           </div>
         )}
       </div>
 
-      {/* ── FEATURES — slim dots, above footer ── */}
+      {/* ── FEATURES — horizontal pill tags, single row above footer ── */}
       {features.length > 0 && (
-        <div style={{ position: "absolute", left: 22, right: 22, bottom: 128 }}>
-          <div style={{ height: 1, backgroundColor: `${B.orange}30`, marginBottom: 13 }} />
-          <div style={{ display: "flex", flexDirection: "column" as const, gap: 9 }}>
-            {features.map((feat, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 11 }}>
-                <div style={{ width: 14, height: 14, backgroundColor: `${B.orange}18`, border: `1px solid ${B.orange}70`, borderRadius: 2, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <svg width={8} height={8} viewBox="0 0 24 24" fill="none" stroke={B.orange} strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
-                    <path d={AD_ICONS[i] ?? AD_ICONS[0]} />
-                  </svg>
-                </div>
-                <span style={{ fontFamily: FB, fontSize: 9.5, fontWeight: 700, color: "rgba(255,255,255,.82)", letterSpacing: "0.24em", textTransform: "uppercase" as const }}>
-                  {feat}
-                </span>
-              </div>
-            ))}
-          </div>
+        <div style={{ position: "absolute", left: 22, right: 22, bottom: 126, display: "flex", flexWrap: "wrap" as const, gap: 6 }}>
+          <div style={{ width: "100%", height: 1, backgroundColor: `${B.orange}28`, marginBottom: 7 }} />
+          {features.map((feat, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 6, paddingRight: 10 }}>
+              <div style={{ width: 4, height: 4, backgroundColor: B.orange, borderRadius: "50%", flexShrink: 0 }} />
+              <span style={{ fontFamily: FB, fontSize: 8.5, fontWeight: 700, color: "rgba(255,255,255,.75)", letterSpacing: "0.2em", textTransform: "uppercase" as const }}>
+                {feat}
+              </span>
+            </div>
+          ))}
         </div>
       )}
 
       {/* ── CONTACT FOOTER ── */}
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 116, backgroundColor: "rgba(6,4,2,.99)", padding: "0 24px", display: "flex", flexDirection: "column" as const, justifyContent: "center", gap: 9 }}>
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 112, backgroundColor: "rgba(6,4,2,.99)", padding: "0 24px", display: "flex", flexDirection: "column" as const, justifyContent: "center", gap: 9 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
           <svg width={20} height={20} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
             <path fill={B.orange} d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
             <path fill={B.orange} d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.845L.057 23.737a.5.5 0 00.614.686l6.04-1.428A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.497-5.21-1.364l-.37-.213-3.844.909.9-3.738-.227-.38A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
           </svg>
           <div>
-            <div style={{ fontFamily: FB, fontSize: 17, fontWeight: 800, color: "#fff", letterSpacing: "0.05em", lineHeight: 1 }}>{ad.phone}</div>
+            <div style={{ fontFamily: FB, fontSize: 18, fontWeight: 800, color: "#fff", letterSpacing: "0.04em", lineHeight: 1 }}>{ad.phone}</div>
             <div style={{ fontFamily: FB, fontSize: 7, color: B.orange, letterSpacing: "0.24em", textTransform: "uppercase" as const, marginTop: 4 }}>WhatsApp · Free Estimate</div>
           </div>
         </div>
