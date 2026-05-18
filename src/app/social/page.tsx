@@ -385,26 +385,26 @@ const AD_DEFAULTS: Record<Lang, AdData> = {
   en: {
     photo:     "/images/pintor/20.png",
     tagline:   "LUXURY FINISHES. TIMELESS BEAUTY.",
-    headline1: "PREMIUM",
-    headline2: "PAINTING",
-    subtitle:  "FOR MIAMI'S FINEST HOMES",
-    body:      "Elevate every space with expert craftsmanship and timeless finishes.",
-    feature1:  "RESIDENTIAL PAINTING",
-    feature2:  "MODERN TEXTURES",
-    feature3:  "PREMIUM CRAFTSMANSHIP",
+    headline1: "ELEVATE",
+    headline2: "YOUR HOME",
+    subtitle:  "MIAMI'S PREMIER PAINTING STUDIO",
+    body:      "Expert craftsmanship and luxury finishes for Miami-Dade's finest homes.",
+    feature1:  "RESIDENTIAL & COMMERCIAL",
+    feature2:  "VENETIAN PLASTER & TEXTURES",
+    feature3:  "FREE ESTIMATES",
     phone:     "+1 305 542 6364",
     web:       "COMBOSTUDIOPAINT.COM",
   },
   es: {
     photo:     "/images/pintor/20.png",
     tagline:   "ACABADOS DE LUJO. BELLEZA ATEMPORAL.",
-    headline1: "PINTURA",
-    headline2: "PREMIUM",
-    subtitle:  "PARA LOS MEJORES HOGARES DE MIAMI",
-    body:      "Eleva cada espacio con artesanía experta y acabados atemporales.",
-    feature1:  "PINTURA RESIDENCIAL",
-    feature2:  "TEXTURAS MODERNAS",
-    feature3:  "ARTESANÍA PREMIUM",
+    headline1: "ELEVA",
+    headline2: "TU HOGAR",
+    subtitle:  "EL ESTUDIO DE PINTURA PREMIER DE MIAMI",
+    body:      "Artesanía experta y acabados de lujo para los mejores hogares de Miami-Dade.",
+    feature1:  "RESIDENCIAL Y COMERCIAL",
+    feature2:  "ESTUCO VENECIANO Y TEXTURAS",
+    feature3:  "ESTIMADOS GRATIS",
     phone:     "+1 305 542 6364",
     web:       "COMBOSTUDIOPAINT.COM",
   },
@@ -417,93 +417,113 @@ const AD_ICONS = [
   "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
 ];
 
+// ─── Ad Slide v4 — "Luxury Gallery" ──────────────────────────────────────────
+// Layout: dark header band → orange divider → clean photo (52%) → text zone → footer
+// No text on photo = more impact. All text in dedicated zones = no clipping.
 function AdSlide({ ad }: { ad: AdData }) {
   const features = [ad.feature1, ad.feature2, ad.feature3].filter(Boolean);
+
+  // Shared SVG paths
+  const WA_PATH1 = "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z";
+  const WA_PATH2 = "M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.845L.057 23.737a.5.5 0 00.614.686l6.04-1.428A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.497-5.21-1.364l-.37-.213-3.844.909.9-3.738-.227-.38A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z";
+
   return (
-    <div style={{ position: "relative", width: 360, height: 640, overflow: "hidden", backgroundColor: B.charcoal }}>
+    <div style={{ position: "relative", width: 360, height: 640, overflow: "hidden", backgroundColor: "#0a0806" }}>
 
-      {/* Full-bleed photo — the star of the ad */}
-      <BgImg src={ad.photo} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-
-      {/* Gradient: subtle dark top → photo fully visible 15–55% → heavy dark below */}
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.6) 0%, rgba(0,0,0,.18) 12%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 44%, rgba(0,0,0,.55) 58%, rgba(0,0,0,.92) 74%, rgba(0,0,0,.99) 88%, #000 100%)" }} />
-
-      {/* Orange brand bar — top */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, backgroundColor: B.orange }} />
-
-      {/* ── HEADER: tagline left · LOGO RIGHT ── */}
-      <div style={{ position: "absolute", top: 16, left: 22, right: 20, display: "flex", alignItems: "center" }}>
-        {ad.tagline && (
-          <div style={{ fontFamily: FB, fontSize: 6.5, color: B.orange, letterSpacing: "0.14em", textTransform: "uppercase" as const, fontWeight: 700, lineHeight: 1.5, maxWidth: 180 }}>
-            {ad.tagline}
+      {/* ── ZONE 1: HEADER BAND (y 0–66) ── */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 66, backgroundColor: "#0a0806", zIndex: 2 }}>
+        {/* Orange accent — very top */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, backgroundColor: B.orange }} />
+        {/* Inner content */}
+        <div style={{ position: "absolute", inset: "3px 0 0 0", display: "flex", alignItems: "center", padding: "0 22px", gap: 14 }}>
+          {/* Logo */}
+          <Logo h={38} op={0.95} inv={true} />
+          {/* Thin vertical divider */}
+          <div style={{ width: 1, height: 26, backgroundColor: "rgba(255,255,255,.12)", flexShrink: 0 }} />
+          {/* Tagline */}
+          {ad.tagline && (
+            <div style={{ fontFamily: FB, fontSize: 6.5, color: B.orange, letterSpacing: "0.15em", textTransform: "uppercase" as const, fontWeight: 700, lineHeight: 1.5 }}>
+              {ad.tagline}
+            </div>
+          )}
+          <div style={{ flex: 1 }} />
+          {/* "EST." badge */}
+          <div style={{ display: "flex", flexDirection: "column" as const, alignItems: "center" }}>
+            <div style={{ fontFamily: FB, fontSize: 6, color: "rgba(255,255,255,.3)", letterSpacing: "0.2em", textTransform: "uppercase" as const }}>EST.</div>
+            <div style={{ fontFamily: FD, fontSize: 13, color: B.orange, letterSpacing: "0.05em", lineHeight: 1 }}>2018</div>
           </div>
-        )}
-        <div style={{ flex: 1 }} />
-        <Logo h={38} op={0.92} inv={true} />
+        </div>
       </div>
 
-      {/* ── HEADLINE — lower half (55% down), photo fully breathes above ── */}
-      <div style={{ position: "absolute", top: 292, left: 20, right: 0 }}>
+      {/* ── ZONE 2: ORANGE SEPARATOR ── */}
+      <div style={{ position: "absolute", top: 66, left: 0, right: 0, height: 2, backgroundColor: B.orange, zIndex: 2 }} />
+
+      {/* ── ZONE 3: PHOTO (y 68–402, 52% of frame) ── */}
+      <BgImg src={ad.photo} style={{ position: "absolute", top: 68, left: 0, width: "100%", height: 334, objectFit: "cover" }} />
+      {/* Very subtle bottom vignette — just to blend into text zone */}
+      <div style={{ position: "absolute", top: 330, left: 0, right: 0, height: 72, background: "linear-gradient(transparent, #0a0806)", zIndex: 1 }} />
+
+      {/* ── ZONE 4: HEADLINE TEXT (y 402–524) ── */}
+      <div style={{ position: "absolute", top: 402, left: 22, right: 22, zIndex: 2 }}>
         {ad.headline1 && (
-          <div style={{ fontFamily: FD, fontSize: 76, fontWeight: 600, color: "#fff", lineHeight: 0.87, letterSpacing: "-0.025em", textTransform: "uppercase" as const }}>
+          <div style={{ fontFamily: FD, fontSize: 56, fontWeight: 600, color: "#fff", lineHeight: 0.87, letterSpacing: "-0.025em", textTransform: "uppercase" as const }}>
             {ad.headline1}
           </div>
         )}
         {ad.headline2 && (
-          <div style={{ fontFamily: FD, fontSize: 76, fontWeight: 600, color: B.orange, lineHeight: 0.87, letterSpacing: "-0.025em", textTransform: "uppercase" as const, marginTop: 5 }}>
+          <div style={{ fontFamily: FD, fontSize: 56, fontWeight: 600, color: B.orange, lineHeight: 0.87, letterSpacing: "-0.025em", textTransform: "uppercase" as const, marginTop: 5 }}>
             {ad.headline2}
           </div>
         )}
-        {ad.subtitle && (
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 18, paddingRight: 22 }}>
-            <div style={{ width: 22, height: 2, backgroundColor: B.orange, flexShrink: 0 }} />
-            <div style={{ fontFamily: FB, fontSize: 8.5, fontWeight: 700, color: "rgba(255,255,255,.9)", letterSpacing: "0.3em", textTransform: "uppercase" as const }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 14 }}>
+          <div style={{ width: 22, height: 1.5, backgroundColor: B.orange, flexShrink: 0 }} />
+          {ad.subtitle && (
+            <div style={{ fontFamily: FB, fontSize: 8, fontWeight: 700, color: "rgba(255,255,255,.82)", letterSpacing: "0.3em", textTransform: "uppercase" as const }}>
               {ad.subtitle}
             </div>
-          </div>
-        )}
-        {ad.body && (
-          <div style={{ fontFamily: FB, fontSize: 11, color: "rgba(255,255,255,.55)", lineHeight: 1.65, marginTop: 10, paddingRight: 22 }}>
-            {ad.body}
+          )}
+        </div>
+        {/* Feature pills — compact horizontal row */}
+        {features.length > 0 && (
+          <div style={{ display: "flex", flexWrap: "wrap" as const, gap: "6px 18px", marginTop: 12 }}>
+            {features.map((feat, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 5 }}>
+                <div style={{ width: 3, height: 3, backgroundColor: B.orange, borderRadius: "50%", flexShrink: 0 }} />
+                <span style={{ fontFamily: FB, fontSize: 7.5, fontWeight: 700, color: "rgba(255,255,255,.6)", letterSpacing: "0.18em", textTransform: "uppercase" as const }}>
+                  {feat}
+                </span>
+              </div>
+            ))}
           </div>
         )}
       </div>
 
-      {/* ── FEATURES — horizontal pill tags, single row above footer ── */}
-      {features.length > 0 && (
-        <div style={{ position: "absolute", left: 22, right: 22, bottom: 126, display: "flex", flexWrap: "wrap" as const, gap: 6 }}>
-          <div style={{ width: "100%", height: 1, backgroundColor: `${B.orange}28`, marginBottom: 7 }} />
-          {features.map((feat, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center", gap: 6, paddingRight: 10 }}>
-              <div style={{ width: 4, height: 4, backgroundColor: B.orange, borderRadius: "50%", flexShrink: 0 }} />
-              <span style={{ fontFamily: FB, fontSize: 8.5, fontWeight: 700, color: "rgba(255,255,255,.75)", letterSpacing: "0.2em", textTransform: "uppercase" as const }}>
-                {feat}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
+      {/* ── ZONE 5: ORANGE SEPARATOR ── */}
+      <div style={{ position: "absolute", bottom: 112, left: 0, right: 0, height: 1.5, backgroundColor: `${B.orange}60`, zIndex: 2 }} />
 
-      {/* ── CONTACT FOOTER ── */}
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 112, backgroundColor: "rgba(6,4,2,.99)", padding: "0 24px", display: "flex", flexDirection: "column" as const, justifyContent: "center", gap: 9 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
+      {/* ── ZONE 6: CONTACT FOOTER (y 528–640, 112px) ── */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 112, backgroundColor: "#0a0806", padding: "0 24px", display: "flex", flexDirection: "column" as const, justifyContent: "center", gap: 10, zIndex: 2 }}>
+        {/* Phone row */}
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <svg width={20} height={20} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
-            <path fill={B.orange} d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-            <path fill={B.orange} d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.845L.057 23.737a.5.5 0 00.614.686l6.04-1.428A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.497-5.21-1.364l-.37-.213-3.844.909.9-3.738-.227-.38A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
+            <path fill={B.orange} d={WA_PATH1} />
+            <path fill={B.orange} d={WA_PATH2} />
           </svg>
-          <div>
+          <div style={{ flex: 1 }}>
             <div style={{ fontFamily: FB, fontSize: 18, fontWeight: 800, color: "#fff", letterSpacing: "0.04em", lineHeight: 1 }}>{ad.phone}</div>
-            <div style={{ fontFamily: FB, fontSize: 7, color: B.orange, letterSpacing: "0.24em", textTransform: "uppercase" as const, marginTop: 4 }}>WhatsApp · Free Estimate</div>
+            <div style={{ fontFamily: FB, fontSize: 7, color: B.orange, letterSpacing: "0.22em", textTransform: "uppercase" as const, marginTop: 4 }}>WhatsApp · Free Estimate</div>
           </div>
         </div>
+        {/* Divider */}
         <div style={{ height: 1, backgroundColor: "rgba(255,255,255,.07)" }} />
-        <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
+        {/* Website row */}
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke={B.orange} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
             <circle cx="12" cy="12" r="10" />
             <line x1="2" y1="12" x2="22" y2="12" />
             <path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
           </svg>
-          <div style={{ fontFamily: FB, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,.72)", letterSpacing: "0.1em" }}>{ad.web}</div>
+          <div style={{ fontFamily: FB, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,.7)", letterSpacing: "0.1em" }}>{ad.web}</div>
         </div>
       </div>
     </div>
