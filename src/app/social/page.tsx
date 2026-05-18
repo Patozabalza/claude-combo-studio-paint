@@ -429,36 +429,30 @@ function AdSlide({ ad }: { ad: AdData }) {
   return (
     <div style={{ position: "relative", width: 360, height: 640, overflow: "hidden", backgroundColor: "#0a0806" }}>
 
-      {/* ── HEADER (y 0–66) ── */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 66, backgroundColor: "#0a0806", zIndex: 2 }}>
+      {/* ── HEADER (y 0–64) — logo + tagline only, no corner badge ── */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 64, backgroundColor: "#0a0806", zIndex: 2 }}>
         <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, backgroundColor: B.orange }} />
         <div style={{ position: "absolute", inset: "3px 0 0 0", display: "flex", alignItems: "center", padding: "0 22px", gap: 14 }}>
-          <Logo h={38} op={0.95} inv={true} />
-          <div style={{ width: 1, height: 26, backgroundColor: "rgba(255,255,255,.1)", flexShrink: 0 }} />
+          <Logo h={36} op={0.95} inv={true} />
+          <div style={{ width: 1, height: 24, backgroundColor: "rgba(255,255,255,.1)", flexShrink: 0 }} />
           {ad.tagline && (
             <div style={{ fontFamily: FB, fontSize: 6.5, color: B.orange, letterSpacing: "0.14em", textTransform: "uppercase" as const, fontWeight: 700, lineHeight: 1.5 }}>
               {ad.tagline}
             </div>
           )}
-          <div style={{ flex: 1 }} />
-          <div style={{ textAlign: "center" as const }}>
-            <div style={{ fontFamily: FB, fontSize: 5.5, color: "rgba(255,255,255,.25)", letterSpacing: "0.22em", textTransform: "uppercase" as const }}>EST.</div>
-            <div style={{ fontFamily: FD, fontSize: 14, color: B.orange, letterSpacing: "0.04em", lineHeight: 1 }}>2018</div>
-          </div>
         </div>
       </div>
 
       {/* ── ORANGE SEP ── */}
-      <div style={{ position: "absolute", top: 66, left: 0, right: 0, height: 2, backgroundColor: B.orange, zIndex: 2 }} />
+      <div style={{ position: "absolute", top: 64, left: 0, right: 0, height: 2, backgroundColor: B.orange, zIndex: 2 }} />
 
-      {/* ── PHOTO (y 68–422, 55% of 640) ── */}
-      <BgImg src={ad.photo} style={{ position: "absolute", top: 68, left: 0, width: "100%", height: 354, objectFit: "cover" }} />
+      {/* ── PHOTO (y 66–412, 54% of 640) ── */}
+      <BgImg src={ad.photo} style={{ position: "absolute", top: 66, left: 0, width: "100%", height: 346, objectFit: "cover" }} />
       {/* Bottom fade into dark text zone */}
-      <div style={{ position: "absolute", top: 356, left: 0, right: 0, height: 66, background: "linear-gradient(transparent, #0a0806)", zIndex: 1 }} />
+      <div style={{ position: "absolute", top: 368, left: 0, right: 0, height: 60, background: "linear-gradient(transparent, #0a0806)", zIndex: 1 }} />
 
-      {/* ── TEXT ZONE (y 422–528, 106px) ── */}
-      {/* 46px + nowrap guarantees no line-wrap: "YOUR HOME" = ~291px < 316px avail */}
-      <div style={{ position: "absolute", top: 422, left: 22, right: 22, zIndex: 2 }}>
+      {/* ── TEXT ZONE (y 412–528, 116px) — 46px + nowrap fits any 2-word phrase ── */}
+      <div style={{ position: "absolute", top: 412, left: 22, right: 22, zIndex: 2 }}>
         {ad.headline1 && (
           <div style={{ fontFamily: FD, fontSize: 46, fontWeight: 600, color: "#fff", lineHeight: 0.88, letterSpacing: "-0.02em", textTransform: "uppercase" as const, whiteSpace: "nowrap" as const }}>
             {ad.headline1}
@@ -480,10 +474,10 @@ function AdSlide({ ad }: { ad: AdData }) {
       </div>
 
       {/* ── ORANGE SEP ── */}
-      <div style={{ position: "absolute", bottom: 110, left: 0, right: 0, height: 1, backgroundColor: `${B.orange}55`, zIndex: 2 }} />
+      <div style={{ position: "absolute", bottom: 112, left: 0, right: 0, height: 1, backgroundColor: `${B.orange}55`, zIndex: 2 }} />
 
-      {/* ── FOOTER (y 530–640, 110px) — features + phone + web ── */}
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 110, backgroundColor: "#0a0806", padding: "10px 22px 0", display: "flex", flexDirection: "column" as const, gap: 0, zIndex: 2 }}>
+      {/* ── FOOTER (y 528–640, 112px) — features + phone + web ── */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 112, backgroundColor: "#0a0806", padding: "10px 22px 10px", display: "flex", flexDirection: "column" as const, gap: 0, zIndex: 2 }}>
         {/* Service pills — top of footer */}
         {features.length > 0 && (
           <div style={{ display: "flex", flexWrap: "wrap" as const, gap: "3px 14px", marginBottom: 8 }}>
@@ -1050,21 +1044,6 @@ export default function SocialPage() {
                   <AdSlide ad={adData} />
                 </div>
               </div>
-              <button
-                onClick={downloadAd} disabled={!!downloading}
-                className="absolute bottom-4 right-4 w-9 h-9 bg-[#E77B00] hover:bg-[#C96900] disabled:opacity-50 text-white rounded-full flex items-center justify-center shadow-lg transition-colors z-10"
-              >
-                {downloading === "ad" ? (
-                  <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                  </svg>
-                ) : (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3" />
-                  </svg>
-                )}
-              </button>
             </div>
           )}
 
