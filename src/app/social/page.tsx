@@ -421,61 +421,68 @@ function AdSlide({ ad }: { ad: AdData }) {
   const features = [ad.feature1, ad.feature2, ad.feature3].filter(Boolean);
   return (
     <div style={{ position: "relative", width: 360, height: 640, overflow: "hidden", backgroundColor: B.charcoal }}>
+
       {/* Full-bleed photo */}
       <BgImg src={ad.photo} style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-      {/* Gradient: dark top → clear middle (photo shows) → dark bottom */}
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, background: "linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.32) 18%,rgba(0,0,0,.06) 34%,rgba(0,0,0,.44) 54%,rgba(0,0,0,.90) 74%,rgba(0,0,0,.99) 100%)" }} />
 
-      {/* ── Brand header: orange block + logo only (no duplicate wordmark) ── */}
-      <div style={{ position: "absolute", top: 24, left: 24, right: 24, display: "flex", alignItems: "center", gap: 14 }}>
-        <div style={{ width: 50, height: 50, backgroundColor: B.orange, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <Logo h={40} op={1} inv={true} />
-        </div>
+      {/* Cinematic gradient: strong dark top → photo breathes → heavy dark bottom */}
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(0,0,0,.88) 0%, rgba(0,0,0,.35) 18%, rgba(0,0,0,.04) 32%, rgba(0,0,0,.04) 48%, rgba(0,0,0,.7) 64%, rgba(0,0,0,.97) 82%, #000 100%)" }} />
+
+      {/* Orange brand bar — top 3px */}
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, backgroundColor: B.orange }} />
+
+      {/* ── HEADER: logo left · tagline right ── */}
+      <div style={{ position: "absolute", top: 18, left: 22, right: 22, display: "flex", alignItems: "center" }}>
+        <Logo h={40} op={0.95} inv={true} />
+        <div style={{ flex: 1 }} />
         {ad.tagline && (
-          <div style={{ fontFamily: FB, fontSize: 7, color: B.orange, letterSpacing: "0.12em", textTransform: "uppercase" as const, fontWeight: 700, lineHeight: 1.5 }}>
+          <div style={{ fontFamily: FB, fontSize: 6.5, color: B.orange, letterSpacing: "0.14em", textTransform: "uppercase" as const, fontWeight: 700, textAlign: "right" as const, lineHeight: 1.5 }}>
             {ad.tagline}
           </div>
         )}
       </div>
 
-      {/* ── Headline block ── */}
-      <div style={{ position: "absolute", top: 112, left: 24, right: 24, maxHeight: 300, overflow: "hidden" }}>
+      {/* ── HEADLINE — editorial, starts at 38% height for photo breathing room ── */}
+      {/* overflow:visible so outer div clips at 360px, not inner container */}
+      <div style={{ position: "absolute", top: 212, left: 20, right: 0, overflow: "visible" }}>
         {ad.headline1 && (
-          <div style={{ fontFamily: FD, fontSize: 64, fontWeight: 600, color: "#fff", lineHeight: 0.92, letterSpacing: "-0.02em", textTransform: "uppercase" as const }}>
+          <div style={{ fontFamily: FD, fontSize: 80, fontWeight: 600, color: "#fff", lineHeight: 0.86, letterSpacing: "-0.025em", textTransform: "uppercase" as const }}>
             {ad.headline1}
           </div>
         )}
         {ad.headline2 && (
-          <div style={{ fontFamily: FD, fontSize: 64, fontWeight: 600, color: B.orange, lineHeight: 0.92, letterSpacing: "-0.02em", textTransform: "uppercase" as const }}>
+          <div style={{ fontFamily: FD, fontSize: 80, fontWeight: 600, color: B.orange, lineHeight: 0.86, letterSpacing: "-0.025em", textTransform: "uppercase" as const, marginTop: 6 }}>
             {ad.headline2}
           </div>
         )}
         {ad.subtitle && (
-          <div style={{ fontFamily: FB, fontSize: 11, fontWeight: 700, color: "#fff", letterSpacing: "0.26em", textTransform: "uppercase" as const, marginTop: 12 }}>
-            {ad.subtitle}
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 20, paddingRight: 22 }}>
+            <div style={{ width: 24, height: 2, backgroundColor: B.orange, flexShrink: 0 }} />
+            <div style={{ fontFamily: FB, fontSize: 9, fontWeight: 700, color: "rgba(255,255,255,.88)", letterSpacing: "0.3em", textTransform: "uppercase" as const }}>
+              {ad.subtitle}
+            </div>
           </div>
         )}
-        <div style={{ width: 26, height: 2, backgroundColor: B.orange, margin: "14px 0 12px" }} />
         {ad.body && (
-          <div style={{ fontFamily: FB, fontSize: 12, color: "rgba(255,255,255,.76)", lineHeight: 1.6 }}>
+          <div style={{ fontFamily: FB, fontSize: 11.5, color: "rgba(255,255,255,.58)", lineHeight: 1.65, marginTop: 10, paddingRight: 22 }}>
             {ad.body}
           </div>
         )}
       </div>
 
-      {/* ── Features (above footer) ── */}
+      {/* ── FEATURES — slim dots, above footer ── */}
       {features.length > 0 && (
-        <div style={{ position: "absolute", left: 24, right: 24, bottom: 124 }}>
-          <div style={{ height: 1, backgroundColor: "rgba(255,255,255,.18)", marginBottom: 14 }} />
-          <div style={{ display: "flex", flexDirection: "column" as const, gap: 12 }}>
+        <div style={{ position: "absolute", left: 22, right: 22, bottom: 128 }}>
+          <div style={{ height: 1, backgroundColor: `${B.orange}30`, marginBottom: 13 }} />
+          <div style={{ display: "flex", flexDirection: "column" as const, gap: 9 }}>
             {features.map((feat, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 13 }}>
-                <div style={{ width: 30, height: 30, borderRadius: "50%", border: `1.5px solid ${B.orange}80`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke={B.orange} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: 11 }}>
+                <div style={{ width: 14, height: 14, backgroundColor: `${B.orange}18`, border: `1px solid ${B.orange}70`, borderRadius: 2, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <svg width={8} height={8} viewBox="0 0 24 24" fill="none" stroke={B.orange} strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round">
                     <path d={AD_ICONS[i] ?? AD_ICONS[0]} />
                   </svg>
                 </div>
-                <span style={{ fontFamily: FB, fontSize: 10, fontWeight: 700, color: "#fff", letterSpacing: "0.22em", textTransform: "uppercase" as const }}>
+                <span style={{ fontFamily: FB, fontSize: 9.5, fontWeight: 700, color: "rgba(255,255,255,.82)", letterSpacing: "0.24em", textTransform: "uppercase" as const }}>
                   {feat}
                 </span>
               </div>
@@ -484,29 +491,26 @@ function AdSlide({ ad }: { ad: AdData }) {
         </div>
       )}
 
-      {/* ── Contact footer ── */}
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 116, backgroundColor: "rgba(8,6,4,.98)", padding: "0 26px", display: "flex", flexDirection: "column" as const, justifyContent: "center", gap: 10 }}>
-        {/* WhatsApp row */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+      {/* ── CONTACT FOOTER ── */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 116, backgroundColor: "rgba(6,4,2,.99)", padding: "0 24px", display: "flex", flexDirection: "column" as const, justifyContent: "center", gap: 9 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
           <svg width={20} height={20} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
             <path fill={B.orange} d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
             <path fill={B.orange} d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.845L.057 23.737a.5.5 0 00.614.686l6.04-1.428A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.497-5.21-1.364l-.37-.213-3.844.909.9-3.738-.227-.38A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z" />
           </svg>
           <div>
-            <div style={{ fontFamily: FB, fontSize: 16, fontWeight: 800, color: "#fff", letterSpacing: "0.06em", lineHeight: 1 }}>{ad.phone}</div>
-            <div style={{ fontFamily: FB, fontSize: 7.5, color: B.orange, letterSpacing: "0.22em", textTransform: "uppercase" as const, marginTop: 4 }}>WhatsApp · Free Estimate</div>
+            <div style={{ fontFamily: FB, fontSize: 17, fontWeight: 800, color: "#fff", letterSpacing: "0.05em", lineHeight: 1 }}>{ad.phone}</div>
+            <div style={{ fontFamily: FB, fontSize: 7, color: B.orange, letterSpacing: "0.24em", textTransform: "uppercase" as const, marginTop: 4 }}>WhatsApp · Free Estimate</div>
           </div>
         </div>
-        {/* Thin separator */}
-        <div style={{ height: 1, backgroundColor: "rgba(255,255,255,.08)" }} />
-        {/* Website row */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke={B.orange} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+        <div style={{ height: 1, backgroundColor: "rgba(255,255,255,.07)" }} />
+        <div style={{ display: "flex", alignItems: "center", gap: 13 }}>
+          <svg width={15} height={15} viewBox="0 0 24 24" fill="none" stroke={B.orange} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
             <circle cx="12" cy="12" r="10" />
             <line x1="2" y1="12" x2="22" y2="12" />
             <path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
           </svg>
-          <div style={{ fontFamily: FB, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,.75)", letterSpacing: "0.12em" }}>{ad.web}</div>
+          <div style={{ fontFamily: FB, fontSize: 11, fontWeight: 700, color: "rgba(255,255,255,.72)", letterSpacing: "0.1em" }}>{ad.web}</div>
         </div>
       </div>
     </div>
