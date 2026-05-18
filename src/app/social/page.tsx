@@ -426,31 +426,27 @@ function AdSlide({ ad }: { ad: AdData }) {
       {/* Gradient: dark top → clear middle (photo shows) → dark bottom */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, background: "linear-gradient(180deg,rgba(0,0,0,.85) 0%,rgba(0,0,0,.32) 18%,rgba(0,0,0,.06) 34%,rgba(0,0,0,.44) 54%,rgba(0,0,0,.90) 74%,rgba(0,0,0,.99) 100%)" }} />
 
-      {/* ── Brand header: orange block + wordmark ── */}
-      <div style={{ position: "absolute", top: 26, left: 26, display: "flex", alignItems: "center", gap: 12 }}>
-        <div style={{ width: 46, height: 46, backgroundColor: B.orange, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
-          <Logo h={36} op={1} inv={true} />
+      {/* ── Brand header: orange block + logo only (no duplicate wordmark) ── */}
+      <div style={{ position: "absolute", top: 24, left: 24, right: 24, display: "flex", alignItems: "center", gap: 14 }}>
+        <div style={{ width: 50, height: 50, backgroundColor: B.orange, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Logo h={40} op={1} inv={true} />
         </div>
-        <div>
-          <div style={{ fontFamily: FB, fontSize: 13, fontWeight: 800, color: "#fff", letterSpacing: "0.26em", lineHeight: 1 }}>COMBO</div>
-          <div style={{ fontFamily: FB, fontSize: 7.5, color: "rgba(255,255,255,.5)", letterSpacing: "0.22em", marginTop: 3 }}>STUDIO PAINT</div>
-          {ad.tagline && (
-            <div style={{ fontFamily: FB, fontSize: 6, color: B.orange, letterSpacing: "0.07em", textTransform: "uppercase" as const, marginTop: 4, fontWeight: 700 }}>
-              {ad.tagline}
-            </div>
-          )}
-        </div>
+        {ad.tagline && (
+          <div style={{ fontFamily: FB, fontSize: 7, color: B.orange, letterSpacing: "0.12em", textTransform: "uppercase" as const, fontWeight: 700, lineHeight: 1.5 }}>
+            {ad.tagline}
+          </div>
+        )}
       </div>
 
       {/* ── Headline block ── */}
-      <div style={{ position: "absolute", top: 118, left: 26, right: 26, maxHeight: 290, overflow: "hidden" }}>
+      <div style={{ position: "absolute", top: 112, left: 24, right: 24, maxHeight: 300, overflow: "hidden" }}>
         {ad.headline1 && (
-          <div style={{ fontFamily: FD, fontSize: 74, fontWeight: 600, color: "#fff", lineHeight: 0.9, letterSpacing: "-0.01em", textTransform: "uppercase" as const }}>
+          <div style={{ fontFamily: FD, fontSize: 64, fontWeight: 600, color: "#fff", lineHeight: 0.92, letterSpacing: "-0.02em", textTransform: "uppercase" as const }}>
             {ad.headline1}
           </div>
         )}
         {ad.headline2 && (
-          <div style={{ fontFamily: FD, fontSize: 74, fontWeight: 600, color: B.orange, lineHeight: 0.9, letterSpacing: "-0.01em", textTransform: "uppercase" as const }}>
+          <div style={{ fontFamily: FD, fontSize: 64, fontWeight: 600, color: B.orange, lineHeight: 0.92, letterSpacing: "-0.02em", textTransform: "uppercase" as const }}>
             {ad.headline2}
           </div>
         )}
@@ -469,7 +465,7 @@ function AdSlide({ ad }: { ad: AdData }) {
 
       {/* ── Features (above footer) ── */}
       {features.length > 0 && (
-        <div style={{ position: "absolute", left: 26, right: 26, bottom: 110 }}>
+        <div style={{ position: "absolute", left: 24, right: 24, bottom: 110 }}>
           <div style={{ height: 1, backgroundColor: "rgba(255,255,255,.18)", marginBottom: 14 }} />
           <div style={{ display: "flex", flexDirection: "column" as const, gap: 12 }}>
             {features.map((feat, i) => (
