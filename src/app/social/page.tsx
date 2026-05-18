@@ -497,32 +497,29 @@ function AdSlide({ ad }: { ad: AdData }) {
       {/* Thin orange line above footer */}
       <div style={{ position: "absolute", bottom: 96, left: 0, right: 0, height: 1, backgroundColor: `${B.orange}40`, zIndex: 3 }} />
 
-      {/* ── FOOTER — 2-column contact ── */}
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 96, backgroundColor: "rgba(5,3,2,0.93)", display: "flex", alignItems: "center", padding: "0 24px", zIndex: 3 }}>
+      {/* ── FOOTER — 2-row stacked contact ── */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 96, backgroundColor: "rgba(5,3,2,0.93)", display: "flex", flexDirection: "column" as const, zIndex: 3 }}>
 
-        {/* LEFT: WhatsApp + phone */}
-        <div style={{ display: "flex", alignItems: "center", gap: 14, flex: 1 }}>
-          <svg width={32} height={32} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+        {/* Row 1: WhatsApp + phone — centered */}
+        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 14, borderBottom: `1px solid ${B.orange}22` }}>
+          <svg width={28} height={28} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
             <path fill={B.orange} d={WA1} />
             <path fill={B.orange} d={WA2} />
           </svg>
           <div>
-            <div style={{ fontFamily: FB, fontSize: 16, fontWeight: 700, color: "#fff", letterSpacing: "0.03em", lineHeight: 1, whiteSpace: "nowrap" as const }}>{ad.phone}</div>
+            <div style={{ fontFamily: FB, fontSize: 17, fontWeight: 700, color: "#fff", letterSpacing: "0.04em", lineHeight: 1, whiteSpace: "nowrap" as const }}>{ad.phone}</div>
             <div style={{ fontFamily: FB, fontSize: 7, color: B.orange, letterSpacing: "0.18em", textTransform: "uppercase" as const, marginTop: 5, whiteSpace: "nowrap" as const }}>WHATSAPP</div>
           </div>
         </div>
 
-        {/* Vertical divider */}
-        <div style={{ width: 1, height: 48, backgroundColor: `${B.orange}45`, flexShrink: 0, margin: "0 20px" }} />
-
-        {/* RIGHT: Globe + website */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <svg width={26} height={26} viewBox="0 0 24 24" fill="none" stroke={B.orange} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+        {/* Row 2: Globe + website — centered */}
+        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 10 }}>
+          <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke={B.orange} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
             <circle cx="12" cy="12" r="10" />
             <line x1="2" y1="12" x2="22" y2="12" />
             <path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
           </svg>
-          <div style={{ fontFamily: FB, fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,.85)", letterSpacing: "0.12em" }}>{ad.web}</div>
+          <div style={{ fontFamily: FB, fontSize: 9, fontWeight: 600, color: "rgba(255,255,255,.65)", letterSpacing: "0.12em", whiteSpace: "nowrap" as const }}>{ad.web}</div>
         </div>
       </div>
     </div>
