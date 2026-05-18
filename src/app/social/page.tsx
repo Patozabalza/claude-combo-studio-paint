@@ -434,24 +434,20 @@ function AdSlide({ ad }: { ad: AdData }) {
       {/* Top fade to reinforce header legibility */}
       <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 130, background: "linear-gradient(to bottom, rgba(0,0,0,.55) 0%, transparent 100%)" }} />
 
-      {/* ── HEADER — orange solid block + brand wordmark ── */}
-      <div style={{ position: "absolute", top: 22, left: 22, display: "flex", alignItems: "center", gap: 13, zIndex: 3 }}>
-        <div style={{ width: 44, height: 44, backgroundColor: B.orange, flexShrink: 0 }} />
-        <div>
-          <div style={{ fontFamily: FB, fontSize: 17, fontWeight: 800, color: "#fff", letterSpacing: "0.10em", lineHeight: 1, textTransform: "uppercase" as const }}>COMBO</div>
-          <div style={{ fontFamily: FB, fontSize: 9, fontWeight: 500, color: "rgba(255,255,255,.72)", letterSpacing: "0.26em", lineHeight: 1, marginTop: 5, textTransform: "uppercase" as const }}>STUDIO PAINT</div>
-        </div>
+      {/* ── HEADER — logo PNG ── */}
+      <div style={{ position: "absolute", top: 20, left: 22, zIndex: 3 }}>
+        <Logo h={44} op={0.92} inv={true} />
       </div>
 
       {/* ── HEADLINE ZONE — stacked large serif ── */}
       <div style={{ position: "absolute", top: 106, left: 22, right: 22, zIndex: 3 }}>
         {ad.headline1 && (
-          <div style={{ fontFamily: FD, fontSize: 62, fontWeight: 600, color: "#fff", lineHeight: 0.90, letterSpacing: "-0.01em", textTransform: "uppercase" as const, whiteSpace: "nowrap" as const }}>
+          <div style={{ fontFamily: FD, fontSize: 52, fontWeight: 600, color: "#fff", lineHeight: 0.90, letterSpacing: "-0.01em", textTransform: "uppercase" as const, whiteSpace: "nowrap" as const }}>
             {ad.headline1}
           </div>
         )}
         {ad.headline2 && (
-          <div style={{ fontFamily: FD, fontSize: 62, fontWeight: 600, color: B.orange, lineHeight: 0.90, letterSpacing: "-0.01em", textTransform: "uppercase" as const, whiteSpace: "nowrap" as const, marginTop: 8 }}>
+          <div style={{ fontFamily: FD, fontSize: 52, fontWeight: 600, color: B.orange, lineHeight: 0.90, letterSpacing: "-0.01em", textTransform: "uppercase" as const, whiteSpace: "nowrap" as const, marginTop: 8 }}>
             {ad.headline2}
           </div>
         )}
@@ -511,8 +507,8 @@ function AdSlide({ ad }: { ad: AdData }) {
             <path fill={B.orange} d={WA2} />
           </svg>
           <div>
-            <div style={{ fontFamily: FB, fontSize: 18, fontWeight: 700, color: "#fff", letterSpacing: "0.03em", lineHeight: 1 }}>{ad.phone}</div>
-            <div style={{ fontFamily: FB, fontSize: 7, color: B.orange, letterSpacing: "0.22em", textTransform: "uppercase" as const, marginTop: 5 }}>CONTACT US ON WHATSAPP</div>
+            <div style={{ fontFamily: FB, fontSize: 16, fontWeight: 700, color: "#fff", letterSpacing: "0.03em", lineHeight: 1, whiteSpace: "nowrap" as const }}>{ad.phone}</div>
+            <div style={{ fontFamily: FB, fontSize: 7, color: B.orange, letterSpacing: "0.18em", textTransform: "uppercase" as const, marginTop: 5, whiteSpace: "nowrap" as const }}>WHATSAPP</div>
           </div>
         </div>
 
