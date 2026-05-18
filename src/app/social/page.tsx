@@ -410,19 +410,12 @@ const AD_DEFAULTS: Record<Lang, AdData> = {
   },
 };
 
-// Three SVG icon paths used for feature rows (home, diamond, shield)
-const AD_ICONS = [
-  "M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z M9 22V12h6v10",
-  "M6 3h12l4 6-10 13L2 9z",
-  "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z",
-];
 
 // ─── Ad Slide v5 — "Luxury Gallery" fixed proportions ────────────────────────
 // Root cause of clipping: multi-word headline2 wraps at 56px (>316px wide).
 // Fix: 46px + white-space:nowrap. Features moved to footer zone.
 // Zones: header(66) | sep(2) | photo(354px=55%) | fade | text(106px) | sep | footer(110px)
 function AdSlide({ ad }: { ad: AdData }) {
-  const features = [ad.feature1, ad.feature2, ad.feature3].filter(Boolean);
   const WA1 = "M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z";
   const WA2 = "M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.845L.057 23.737a.5.5 0 00.614.686l6.04-1.428A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.68-.497-5.21-1.364l-.37-.213-3.844.909.9-3.738-.227-.38A10 10 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z";
 
@@ -474,45 +467,34 @@ function AdSlide({ ad }: { ad: AdData }) {
       </div>
 
       {/* ── ORANGE SEP ── */}
-      <div style={{ position: "absolute", bottom: 112, left: 0, right: 0, height: 1, backgroundColor: `${B.orange}55`, zIndex: 2 }} />
+      <div style={{ position: "absolute", bottom: 96, left: 0, right: 0, height: 1, backgroundColor: `${B.orange}45`, zIndex: 2 }} />
 
-      {/* ── FOOTER (y 528–640, 112px) — features + phone + web ── */}
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 112, backgroundColor: "#0a0806", padding: "10px 22px 10px", display: "flex", flexDirection: "column" as const, gap: 0, zIndex: 2 }}>
-        {/* Service pills — top of footer */}
-        {features.length > 0 && (
-          <div style={{ display: "flex", flexWrap: "wrap" as const, gap: "3px 14px", marginBottom: 8 }}>
-            {features.map((feat, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 5 }}>
-                <div style={{ width: 3, height: 3, backgroundColor: B.orange, borderRadius: "50%", flexShrink: 0 }} />
-                <span style={{ fontFamily: FB, fontSize: 7, fontWeight: 700, color: "rgba(255,255,255,.5)", letterSpacing: "0.16em", textTransform: "uppercase" as const }}>
-                  {feat}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-        {/* Divider */}
-        <div style={{ height: 1, backgroundColor: "rgba(255,255,255,.07)", marginBottom: 10 }} />
-        {/* Phone row */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
-          <svg width={18} height={18} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
+      {/* ── FOOTER (96px) — 2-column elegant contact ── */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 96, backgroundColor: "#0a0806", display: "flex", alignItems: "center", padding: "0 24px", zIndex: 2 }}>
+
+        {/* LEFT: WhatsApp + phone */}
+        <div style={{ display: "flex", alignItems: "center", gap: 14, flex: 1 }}>
+          <svg width={32} height={32} viewBox="0 0 24 24" fill="none" style={{ flexShrink: 0 }}>
             <path fill={B.orange} d={WA1} />
             <path fill={B.orange} d={WA2} />
           </svg>
           <div>
-            <div style={{ fontFamily: FB, fontSize: 17, fontWeight: 800, color: "#fff", letterSpacing: "0.04em", lineHeight: 1 }}>{ad.phone}</div>
-            <div style={{ fontFamily: FB, fontSize: 6.5, color: B.orange, letterSpacing: "0.22em", textTransform: "uppercase" as const, marginTop: 3 }}>WhatsApp · Free Estimate</div>
+            <div style={{ fontFamily: FB, fontSize: 19, fontWeight: 700, color: "#fff", letterSpacing: "0.03em", lineHeight: 1 }}>{ad.phone}</div>
+            <div style={{ fontFamily: FB, fontSize: 7, color: B.orange, letterSpacing: "0.22em", textTransform: "uppercase" as const, marginTop: 5 }}>CONTACT US ON WHATSAPP</div>
           </div>
         </div>
-        {/* Divider */}
-        <div style={{ height: 1, backgroundColor: "rgba(255,255,255,.07)", marginBottom: 8 }} />
-        {/* Website row */}
+
+        {/* Vertical divider */}
+        <div style={{ width: 1, height: 48, backgroundColor: `${B.orange}45`, flexShrink: 0, margin: "0 20px" }} />
+
+        {/* RIGHT: Globe + website */}
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke={B.orange} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
-            <circle cx="12" cy="12" r="10" /><line x1="2" y1="12" x2="22" y2="12" />
+          <svg width={26} height={26} viewBox="0 0 24 24" fill="none" stroke={B.orange} strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <circle cx="12" cy="12" r="10" />
+            <line x1="2" y1="12" x2="22" y2="12" />
             <path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" />
           </svg>
-          <div style={{ fontFamily: FB, fontSize: 10.5, fontWeight: 700, color: "rgba(255,255,255,.68)", letterSpacing: "0.1em" }}>{ad.web}</div>
+          <div style={{ fontFamily: FB, fontSize: 10, fontWeight: 600, color: "rgba(255,255,255,.85)", letterSpacing: "0.12em" }}>{ad.web}</div>
         </div>
       </div>
     </div>
