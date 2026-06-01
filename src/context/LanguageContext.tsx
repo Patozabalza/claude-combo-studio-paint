@@ -10,7 +10,7 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-const translations: Record<Language, Record<string, string>> = {
+export const defaultTranslations: Record<Language, Record<string, string>> = {
   en: {
     // Nav
     "nav.home": "Home",
@@ -363,11 +363,18 @@ const LanguageContext = createContext<LanguageContextType>({
   t: (key) => key,
 });
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
+interface LanguageProviderProps {
+  children: ReactNode;
+  initialTranslations?: Record<string, Record<string, string>>;
+}
+
+export function LanguageProvider({ children, initialTranslations }: LanguageProviderProps) {
   const [lang, setLang] = useState<Language>("en");
 
+  const translations = initialTranslations ?? defaultTranslations;
+
   const t = (key: string): string => {
-    return translations[lang][key] ?? translations["en"][key] ?? key;
+    return translations[lang]?.[key] ?? translations["en"]?.[key] ?? key;
   };
 
   return (
