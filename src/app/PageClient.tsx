@@ -3,7 +3,6 @@
 import { LanguageProvider } from "@/context/LanguageContext";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import TrustBar from "@/components/TrustBar";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import ColorStudio from "@/components/ColorStudio";
@@ -27,7 +26,6 @@ export default function PageClient({ initialTranslations }: PageClientProps) {
       <Header />
       <main>
         <Hero />
-        <TrustBar />
         <About />
         <ComboDifference />
         <Services />
