@@ -1,4 +1,4 @@
-import { defaultTranslations } from "@/context/LanguageContext";
+import { defaultTranslations } from "@/lib/translations";
 import { fetchSiteTranslations } from "@/lib/sanity.queries";
 import PageClient from "./PageClient";
 

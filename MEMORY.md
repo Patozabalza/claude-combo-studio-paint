@@ -178,16 +178,57 @@ npm run lint     # ESLint
 
 ---
 
+## ⚠️ Gotchas importantes
+
+### CORS Allow Credentials — obligatorio para el CMS
+Para que el Studio funcione en producción, `https://combostudiopaint.com` debe tener **Allow credentials: ON** en Sanity CORS.
+Sin esto el Studio muestra "Connect this studio to your project" o "An error occurred" aunque el dominio esté en la lista CORS.
+Lo mismo aplica para `http://localhost:3000` en desarrollo.
+Config: sanity.io → proyecto 5nrvq646 → Settings → API → CORS Origins → toggle Allow credentials.
+
+### Netlify + variables de entorno
+Las variables `NEXT_PUBLIC_*` se embeben **en el momento del build**, no en runtime. Si se agregan después del deploy, el Studio muestra `"Configuration must contain projectId"` aunque las variables estén en el dashboard.
+**Fix:** Agregar las variables → luego triggerear un nuevo deploy manual: Deploys → Trigger deploy → Deploy site.
+
+### GitHub push en macOS
+LibreSSL bloquea `git push` normal. Workaround:
+```bash
+GIT_SSL_NO_VERIFY=true git push origin main
+```
+Si el token expiró, actualizar el remote primero:
+```bash
+git remote set-url origin "https://Patozabalza:TOKEN@github.com/Patozabalza/claude-combo-studio-paint.git"
+```
+Tokens nuevos: github.com → Settings → Developer settings → Personal access tokens → Tokens (classic) → scope: `repo`.
+
+### Sanity API tokens para scripts de seed
+- Necesita rol **Editor** (read+write). Viewer = solo lectura. Deploy Studio = solo deploy.
+- Endpoint mutaciones: `https://5nrvq646.api.sanity.io/v2024-01-01/data/mutate/production`
+- IDs singleton: `siteSettings`, `siteHero`, `siteAbout`, `siteTestimonials`, `siteFAQ`, `sitePageText`
+
+### Turbopack panic en dev (no afecta producción)
+Turbopack muestra `FATAL: Failed to write app endpoint /cotizador/page` al tener Sanity instalado. El servidor sigue funcionando — ignorar esos mensajes. El build de producción funciona perfecto.
+
+---
+
 ## 📝 Historial de cambios relevantes
 
 ### 2026-06-01
 - ✅ Integración Sanity CMS (solo web de marketing, cotizador intacto)
-- ✅ Studio en `/studio` con login Google
+- ✅ CMS renombrado de `/studio` a `/cms` para acceso del cliente
+- ✅ Studio publicado en `combostudiopaint.com/cms`
 - ✅ 6 documentos poblados via API (settings, hero, about, testimonials, faq, pageText)
-- ✅ CORS configurado con Allow credentials
+- ✅ CORS configurado con Allow credentials en localhost:3000 y combostudiopaint.com
 - ✅ `suppressHydrationWarning` en `<html>` (fix extensión LanguageTool)
-- ✅ `page.tsx` convertido a Server Component con fetch de Sanity
+- ✅ `page.tsx` convertido a Server Component con fetch de Sanity (revalida 60s)
 - ✅ Fallback a `defaultTranslations` si Sanity no responde
+- ✅ Variables de entorno Sanity agregadas en Netlify
+- ⚠️ Netlify requiere redeploy DESPUÉS de agregar env vars (NEXT_PUBLIC_* se embeben en build)
+- ✅ Studio registrado como host en sanity.io → proyecto 5nrvq646 → Studios → combostudiopaint.com
+- ✅ CMS accesible en combostudiopaint.com/cms con login Google
+
+### Para invitar colaboradores al CMS
+sanity.io → proyecto 5nrvq646 → Members → Invite → email → rol Editor
 
 ### Sesiones anteriores
 - Rediseños múltiples del AdSlide (v1→v6): full-bleed photo, gradiente left-to-right, footer 2 filas, solo WhatsApp en footer
