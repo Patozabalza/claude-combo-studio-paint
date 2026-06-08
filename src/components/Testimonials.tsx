@@ -41,6 +41,7 @@ export default function Testimonials() {
                   src={t_.image}
                   alt={`Project - ${t_.location}`}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                   quality={70}
                 />
@@ -52,7 +53,7 @@ export default function Testimonials() {
                     fontSize: "1.15rem",
                     lineHeight: "1.6",
                   }}>
-                  "{t_.quote}"
+                  &ldquo;{t_.quote}&rdquo;
                 </p>
                 <div className="flex items-center justify-between border-t border-[#D9CBB8]/50 pt-4">
                   <div>

@@ -52,6 +52,7 @@ export default function About() {
                 src="/images/proyectos/1.png"
                 alt="Luxury Miami interior - Combo Studio Paint"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
                 quality={85}
               />

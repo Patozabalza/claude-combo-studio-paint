@@ -753,13 +753,12 @@ function campaignThemes(campaignIdx: number, lang: Lang): Theme[] {
 }
 
 export default function SocialPage() {
-  // Pick a random campaign once on mount — all campaigns share the same slide ID structure
-  const initCampaign = useRef(Math.floor(Math.random() * CAMPAIGNS.length));
   const [lang,           setLang]         = useState<Lang>("en");
-  const [campaignIdx,    setCampaignIdx]  = useState<number>(initCampaign.current);
+  // Pick a random campaign once on mount — lazy initializer runs only on first render
+  const [campaignIdx,    setCampaignIdx]  = useState<number>(() => Math.floor(Math.random() * CAMPAIGNS.length));
   const [activeTheme,    setActiveTheme]  = useState<ThemeKey>("interior");
-  const [selectedId,     setSelectedId]   = useState<string>(CAMPAIGNS[initCampaign.current].themes[0].slides[0].id);
-  const [slideMap,       setSlideMap]     = useState<Record<string, Record<string, Slide>>>(() => buildSlideMap(CAMPAIGNS[initCampaign.current].themes));
+  const [selectedId,     setSelectedId]   = useState<string>(() => CAMPAIGNS[campaignIdx].themes[0].slides[0].id);
+  const [slideMap,       setSlideMap]     = useState<Record<string, Record<string, Slide>>>(() => buildSlideMap(CAMPAIGNS[campaignIdx].themes));
   const [pickerFor,        setPickerFor]        = useState<{ slideId: string; isAlt: boolean } | null>(null);
   const [downloading,      setDownloading]      = useState<string | null>(null);
   const [uploadedPhotos,   setUploadedPhotos]   = useState<string[]>([]);

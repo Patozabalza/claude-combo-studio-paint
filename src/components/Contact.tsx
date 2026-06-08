@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 
 export default function Contact() {
   const { t } = useLanguage();
-  const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
+  const router = useRouter();
+  const [status, setStatus] = useState<"idle" | "sending">("idle");
   const [form, setForm] = useState({
     name: "", phone: "", email: "", type: "", service: "",
     location: "", message: "", method: "",
@@ -39,8 +41,7 @@ export default function Contact() {
 
       const web3data = web3res.status === "fulfilled" ? web3res.value : null;
       if (web3data?.success) {
-        setStatus("success");
-        setForm({ name: "", phone: "", email: "", type: "", service: "", location: "", message: "", method: "" });
+        router.push("/sent-form");
       } else {
         setStatus("idle");
       }
@@ -115,17 +116,7 @@ export default function Contact() {
           {/* Form */}
           <div>
             <div className="border-t border-[#F4F0E8]/10 pt-10 lg:pt-0 lg:border-0">
-              {status === "success" ? (
-                <div className="flex flex-col items-center justify-center py-20 text-center">
-                  <div className="w-12 h-12 border border-[#E77B00] flex items-center justify-center mb-6">
-                    <svg className="w-5 h-5 text-[#E77B00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <p className="text-[#F4F0E8] font-semibold text-xl">{t("contact.success")}</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-8">
                   <div className="grid sm:grid-cols-2 gap-8">
                     <div>
                       <label className={labelClass}>{t("contact.name")}</label>
@@ -184,7 +175,6 @@ export default function Contact() {
                     {status === "sending" ? t("contact.sending") : t("contact.cta")}
                   </button>
                 </form>
-              )}
             </div>
           </div>
         </div>

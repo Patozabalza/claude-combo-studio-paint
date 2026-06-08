@@ -17,6 +17,7 @@ export default function ColorStudio() {
                 src="/images/proyectos/10.png"
                 alt="Color Design Studio - Combo Studio Paint"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
                 quality={85}
               />
@@ -63,7 +64,7 @@ export default function ColorStudio() {
             <blockquote className="border-l-2 border-[#E77B00] pl-6 mb-12">
               <p className="text-[#5B3A29]/80 text-2xl font-light leading-relaxed italic"
                 style={{ fontFamily: "var(--font-cormorant), 'Cormorant Garamond', Georgia, serif" }}>
-                "{t("color.quote")}"
+                &ldquo;{t("color.quote")}&rdquo;
               </p>
             </blockquote>
 

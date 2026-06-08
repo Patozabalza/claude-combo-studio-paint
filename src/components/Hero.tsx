@@ -21,6 +21,7 @@ export default function Hero() {
           src="/images/proyectos/7.png"
           alt="Combo Studio Paint - Luxury Miami Property"
           fill
+          sizes="100vw"
           className="object-cover object-center"
           priority
           quality={90}

@@ -39,7 +39,7 @@ export default function Areas() {
             <div className="grid grid-cols-3 gap-x-8 gap-y-0 border-t border-[#D9CBB8]/50">
               {areaColumns.map((col, ci) => (
                 <div key={ci}>
-                  {col.map((area, ai) => (
+                  {col.map((area) => (
                     <div
                       key={area}
                       className="py-3.5 border-b border-[#D9CBB8]/40 text-[#5B3A29] text-sm font-medium hover:text-[#E77B00] transition-colors duration-200"
@@ -61,6 +61,7 @@ export default function Areas() {
               src="/images/pintor/36.png"
               alt="Combo Studio Paint - Miami-Dade Coverage"
               fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
               className="object-cover"
               quality={80}
             />

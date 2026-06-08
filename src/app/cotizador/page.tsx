@@ -140,7 +140,11 @@ function NumInput({ value, onChange, prefix, step = 1, min = 0, className = "" }
   prefix?: string; step?: number; min?: number; className?: string;
 }) {
   const [raw, setRaw] = useState(String(value));
-  useEffect(() => { setRaw(String(value)); }, [value]);
+  const [prevValue, setPrevValue] = useState(value);
+  if (prevValue !== value) {
+    setPrevValue(value);
+    setRaw(String(value));
+  }
   return (
     <div className={`flex items-center bg-white border border-[#D9CBB8] rounded px-2 py-1 ${className}`}>
       {prefix && <span className="text-[#5B3A29]/30 text-xs mr-1">{prefix}</span>}
@@ -621,12 +625,13 @@ export default function CotizadorPage() {
   const t = T[lang];
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setConditions(defaultConditions(lang));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang]);
 
   useEffect(() => {
     const mult = CITIES[city]?.multiplier ?? 1;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setServices(prev => {
       const next = { ...prev };
       SERVICES.forEach(def => {
@@ -677,6 +682,7 @@ export default function CotizadorPage() {
     try {
       const d = JSON.parse(localStorage.getItem("combo_est_v2") ?? "null");
       if (!d) return;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       if (d.projectName) setProjectName(d.projectName);
       if (d.clientName)  setClientName(d.clientName);
       if (d.city)        setCity(d.city);

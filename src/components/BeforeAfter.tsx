@@ -56,6 +56,7 @@ export default function BeforeAfter() {
                       src={project.before}
                       alt="Before"
                       fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover grayscale transition-transform duration-700 group-hover:scale-105"
                       quality={75}
                     />
@@ -75,6 +76,7 @@ export default function BeforeAfter() {
                       src={project.after}
                       alt="After"
                       fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       quality={75}
                     />
@@ -119,6 +121,7 @@ export default function BeforeAfter() {
               src={lightbox}
               alt="Project detail"
               fill
+              sizes="100vw"
               className="object-contain"
               quality={95}
             />

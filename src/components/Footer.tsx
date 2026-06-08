@@ -20,6 +20,7 @@ export default function Footer() {
                 width={120}
                 height={80}
                 className="h-14 w-auto object-contain"
+                loading="eager"
               />
             </div>
             <p className="text-[#F4F0E8]/45 text-sm leading-relaxed max-w-xs mb-6">
