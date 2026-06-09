@@ -1,11 +1,18 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion, type Variants } from "framer-motion";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { defaultTranslations } from "@/lib/translations";
+
+declare global {
+  interface Window {
+    dataLayer: Record<string, unknown>[];
+  }
+}
 
 const fadeUp: Variants = {
   initial: { opacity: 0, y: 20 },
@@ -45,6 +52,11 @@ const STEPS = [
 ];
 
 export default function SentFormPage() {
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: "generate_lead" });
+  }, []);
+
   return (
     <LanguageProvider initialTranslations={defaultTranslations}>
       <Header />
