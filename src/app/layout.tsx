@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Montserrat, Cormorant_Garamond } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -123,7 +124,9 @@ export default function RootLayout({
     <html lang="en" className={`${montserrat.variable} ${cormorant.variable} scroll-smooth`} suppressHydrationWarning>
       <head>
         {/* Google Tag Manager */}
-        <script
+        <Script
+          id="gtm-base"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
