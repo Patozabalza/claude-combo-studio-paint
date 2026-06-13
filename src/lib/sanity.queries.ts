@@ -9,6 +9,8 @@ const SITE_QUERY = `{
   "pageText": *[_type == "pageText"][0]
 }`;
 
+export const TRACKING_QUERY = `*[_type == "settings"][0].tracking`;
+
 type SanityData = {
   settings?: Record<string, unknown>;
   hero?: Record<string, Record<string, string>>;
@@ -149,6 +151,27 @@ export function mapSanityToTranslations(
   }
 
   return result;
+}
+
+export type TrackingSettings = {
+  gtmId?: string;
+  ga4Id?: string;
+  metaPixelId?: string;
+  googleAdsId?: string;
+};
+
+export async function fetchTrackingSettings(): Promise<TrackingSettings> {
+  if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return {};
+  try {
+    const data = await sanityClient.fetch<TrackingSettings>(
+      TRACKING_QUERY,
+      {},
+      { next: { revalidate: 60 } }
+    );
+    return data ?? {};
+  } catch {
+    return {};
+  }
 }
 
 export async function fetchSiteTranslations(
