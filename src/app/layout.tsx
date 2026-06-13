@@ -4,6 +4,8 @@ import Script from "next/script";
 import "./globals.css";
 import { fetchTrackingSettings } from "@/lib/sanity.queries";
 
+export const dynamic = "force-dynamic";
+
 const FALLBACK_GTM_ID = "GTM-WDXXGQJ9";
 
 const montserrat = Montserrat({

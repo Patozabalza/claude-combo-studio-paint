@@ -1,15 +1,15 @@
 import { sanityClient } from "./sanity";
 
 const SITE_QUERY = `{
-  "settings": *[_id == "siteSettings"][0],
-  "hero": *[_id == "siteHero"][0],
-  "about": *[_id == "siteAbout"][0],
-  "testimonials": *[_id == "siteTestimonials"][0],
-  "faq": *[_id == "siteFAQ"][0],
-  "pageText": *[_id == "sitePageText"][0]
+  "settings": *[_type == "settings" || _id == "siteSettings"] | order(_updatedAt desc)[0],
+  "hero": *[_type == "hero" || _id == "siteHero"] | order(_updatedAt desc)[0],
+  "about": *[_type == "about" || _id == "siteAbout"] | order(_updatedAt desc)[0],
+  "testimonials": *[_type == "testimonials" || _id == "siteTestimonials"] | order(_updatedAt desc)[0],
+  "faq": *[_type == "faq" || _id == "siteFAQ"] | order(_updatedAt desc)[0],
+  "pageText": *[_type == "pageText" || _id == "sitePageText"] | order(_updatedAt desc)[0]
 }`;
 
-export const TRACKING_QUERY = `*[_id == "siteSettings"][0].tracking`;
+export const TRACKING_QUERY = `*[_type == "settings"] | order(_updatedAt desc)[0].tracking`;
 
 type SanityData = {
   settings?: Record<string, unknown>;
