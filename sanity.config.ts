@@ -17,12 +17,24 @@ export default defineConfig({
         S.list()
           .title("Combo Studio Paint CMS")
           .items([
-            S.documentTypeListItem("settings").title("⚙️ Configuración"),
-            S.documentTypeListItem("hero").title("🏠 Hero"),
-            S.documentTypeListItem("about").title("ℹ️ Nosotros"),
-            S.documentTypeListItem("testimonials").title("⭐ Testimonios"),
-            S.documentTypeListItem("faq").title("❓ Preguntas Frecuentes"),
-            S.documentTypeListItem("pageText").title("📝 Textos de la Web"),
+            S.listItem().title("⚙️ Configuración").id("settings").child(
+              S.document().schemaType("settings").documentId("siteSettings").title("⚙️ Configuración General")
+            ),
+            S.listItem().title("🏠 Hero").id("hero").child(
+              S.document().schemaType("hero").documentId("siteHero").title("🏠 Hero")
+            ),
+            S.listItem().title("ℹ️ Nosotros").id("about").child(
+              S.document().schemaType("about").documentId("siteAbout").title("ℹ️ Nosotros")
+            ),
+            S.listItem().title("⭐ Testimonios").id("testimonials").child(
+              S.document().schemaType("testimonials").documentId("siteTestimonials").title("⭐ Testimonios")
+            ),
+            S.listItem().title("❓ Preguntas Frecuentes").id("faq").child(
+              S.document().schemaType("faq").documentId("siteFAQ").title("❓ Preguntas Frecuentes")
+            ),
+            S.listItem().title("📝 Textos de la Web").id("pageText").child(
+              S.document().schemaType("pageText").documentId("sitePageText").title("📝 Textos de la Web")
+            ),
           ]),
     }),
     visionTool(),

@@ -1,15 +1,15 @@
 import { sanityClient } from "./sanity";
 
 const SITE_QUERY = `{
-  "settings": *[_type == "settings"][0],
-  "hero": *[_type == "hero"][0],
-  "about": *[_type == "about"][0],
-  "testimonials": *[_type == "testimonials"][0],
-  "faq": *[_type == "faq"][0],
-  "pageText": *[_type == "pageText"][0]
+  "settings": *[_id == "siteSettings"][0],
+  "hero": *[_id == "siteHero"][0],
+  "about": *[_id == "siteAbout"][0],
+  "testimonials": *[_id == "siteTestimonials"][0],
+  "faq": *[_id == "siteFAQ"][0],
+  "pageText": *[_id == "sitePageText"][0]
 }`;
 
-export const TRACKING_QUERY = `*[_type == "settings"][0].tracking`;
+export const TRACKING_QUERY = `*[_id == "siteSettings"][0].tracking`;
 
 type SanityData = {
   settings?: Record<string, unknown>;
