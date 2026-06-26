@@ -10,7 +10,7 @@ export default function Contact() {
   const [status, setStatus] = useState<"idle" | "sending">("idle");
   const [form, setForm] = useState({
     name: "", phone: "", email: "", type: "", service: "",
-    location: "", message: "", method: "",
+    location: "", message: "", method: "", website: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -26,7 +26,7 @@ export default function Contact() {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({
-            access_key: "cc717448-45a7-496e-b7ef-ef3c26e34200",
+            access_key: process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY,
             subject: `New quote request — ${form.type || "General"} | Combo Studio Paint`,
             from_name: "Combo Studio Paint Web",
             ...form,
@@ -117,6 +117,17 @@ export default function Contact() {
           <div>
             <div className="border-t border-[#F4F0E8]/10 pt-10 lg:pt-0 lg:border-0">
               <form onSubmit={handleSubmit} className="space-y-8">
+                  {/* Honeypot anti-spam — invisible para humanos, los bots suelen autocompletarlo */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={form.website}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                  />
                   <div className="grid sm:grid-cols-2 gap-8">
                     <div>
                       <label className={labelClass}>{t("contact.name")}</label>

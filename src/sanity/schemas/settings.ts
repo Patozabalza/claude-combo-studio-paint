@@ -36,6 +36,7 @@ export const settings = defineType({
           type: "string",
           description: "Formato: GTM-XXXXXXX · Encuéntralo en tagmanager.google.com → Administrador → ID del contenedor",
           placeholder: "GTM-XXXXXXX",
+          validation: (Rule) => Rule.regex(/^GTM-[A-Z0-9]+$/, { name: "GTM ID" }),
         }),
         defineField({
           name: "ga4Id",
@@ -43,6 +44,7 @@ export const settings = defineType({
           type: "string",
           description: "Formato: G-XXXXXXXXXX · Solo si usas GA4 directo sin GTM. Si ya tienes GTM configurado, déjalo vacío.",
           placeholder: "G-XXXXXXXXXX",
+          validation: (Rule) => Rule.regex(/^G-[A-Z0-9]+$/, { name: "GA4 ID" }),
         }),
         defineField({
           name: "metaPixelId",
@@ -50,6 +52,7 @@ export const settings = defineType({
           type: "string",
           description: "Formato: número de 15-16 dígitos · Encuéntralo en Meta Business Suite → Events Manager",
           placeholder: "123456789012345",
+          validation: (Rule) => Rule.regex(/^\d{15,16}$/, { name: "Meta Pixel ID" }),
         }),
         defineField({
           name: "googleAdsId",
@@ -57,6 +60,7 @@ export const settings = defineType({
           type: "string",
           description: "Formato: AW-XXXXXXXXXX · Encuéntralo en Google Ads → Herramientas → Conversiones",
           placeholder: "AW-XXXXXXXXXX",
+          validation: (Rule) => Rule.regex(/^AW-\d+$/, { name: "Google Ads ID" }),
         }),
       ],
     }),

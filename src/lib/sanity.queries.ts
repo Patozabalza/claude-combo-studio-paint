@@ -160,6 +160,25 @@ export type TrackingSettings = {
   googleAdsId?: string;
 };
 
+// Whitelist estricta por campo — estos IDs se interpolan sin escapar dentro de
+// <script> inline en layout.tsx, así que cualquier valor que no calce exacto
+// con su formato se descarta en vez de arriesgar una inyección.
+const TRACKING_PATTERNS: Record<keyof TrackingSettings, RegExp> = {
+  gtmId: /^GTM-[A-Z0-9]+$/,
+  ga4Id: /^G-[A-Z0-9]+$/,
+  metaPixelId: /^\d{15,16}$/,
+  googleAdsId: /^AW-\d+$/,
+};
+
+function sanitizeTrackingSettings(data: TrackingSettings): TrackingSettings {
+  const result: TrackingSettings = {};
+  for (const key of Object.keys(TRACKING_PATTERNS) as (keyof TrackingSettings)[]) {
+    const value = data[key]?.trim();
+    if (value && TRACKING_PATTERNS[key].test(value)) result[key] = value;
+  }
+  return result;
+}
+
 export async function fetchTrackingSettings(): Promise<TrackingSettings> {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return {};
   try {
@@ -168,7 +187,7 @@ export async function fetchTrackingSettings(): Promise<TrackingSettings> {
       {},
       { next: { revalidate: 60 } }
     );
-    return data ?? {};
+    return sanitizeTrackingSettings(data ?? {});
   } catch {
     return {};
   }
