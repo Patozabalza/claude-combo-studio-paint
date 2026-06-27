@@ -53,11 +53,15 @@ Internal pricing and proposal tool for the owner. Not linked from the public sit
 
 ### Contact form
 
-[src/components/Contact.tsx](src/components/Contact.tsx) submits to **Web3Forms** (`https://api.web3forms.com/submit`) — no backend. The access key is already in the component.
+[src/components/Contact.tsx](src/components/Contact.tsx) submits to **Web3Forms** (`https://api.web3forms.com/submit`) using `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` (env var — see `.env.local.example`). In parallel it POSTs to [src/app/api/submit-lead/route.ts](src/app/api/submit-lead/route.ts), which validates input (email/phone format, length limits, honeypot field `website`) before forwarding to a Google Apps Script webhook (`GOOGLE_SHEETS_WEBHOOK_URL`, server-only) that appends a row to a Google Sheet. Errors never leak `error.message` to the client.
+
+### Environment variables
+
+See [.env.local.example](.env.local.example) for the full list: `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`, `GOOGLE_SHEETS_WEBHOOK_URL`. All four must also be set in Netlify's dashboard (Project configuration → Environment variables) — `NEXT_PUBLIC_*` vars are inlined at build time, so adding/changing one requires a redeploy, not just a runtime restart.
 
 ### Deployment
 
-Netlify via `@netlify/plugin-nextjs`. The `netlify.toml` publishes `.next` and uses Node 20. **macOS LibreSSL blocks `git push`** — use the Python urllib + GitHub Git Data API workaround instead (see memory).
+Netlify via `@netlify/plugin-nextjs`. The `netlify.toml` publishes `.next` and uses Node 20. **macOS LibreSSL blocks `git push`** — try `GIT_SSL_NO_VERIFY=true git push origin main` first (confirmed working 2026-06-26); if that fails, fall back to the Python urllib + GitHub Git Data API workaround (see memory).
 
 ### Tailwind v4 note
 
