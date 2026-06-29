@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /aeo
 
 Sitemap: https://combostudiopaint.com/sitemap.xml

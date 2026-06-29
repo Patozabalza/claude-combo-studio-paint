@@ -118,6 +118,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    other: {
+      "facebook-domain-verification": "rsk7jspea9e7jl9ssj3ir2o9tslvyc",
+    },
+  },
 };
 
 export default async function RootLayout({
@@ -249,6 +254,70 @@ export default async function RootLayout({
                 ],
               },
             ]),
+          }}
+        />
+        {/* AEO: detailed service-matrix schema for AI answer engines (ChatGPT, Gemini, Perplexity). Separate from the LocalBusiness/WebSite/FAQ block above — does not replace it. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HousePainter",
+              "@id": "https://combostudiopaint.com/#painting-contractor",
+              name: "Combo Studio Paint",
+              url: "https://combostudiopaint.com",
+              telephone: "+13055426364",
+              email: "combostudiopaint@gmail.com",
+              description: "Premium painting contractor specializing in Limewash, Venetian Plaster, and Roman Clay decorative finishes, full residential repainting, and commercial painting programs for hospitality, corporate office, and HOA clients across Miami-Dade County.",
+              knowsAbout: [
+                "Limewash painting",
+                "Venetian plaster",
+                "Roman clay finishes",
+                "Decorative wall finishes",
+                "Hospitality painting scheduling",
+                "HOA community painting programs",
+                "Drywall repair",
+                "Exterior pressure washing and resanding",
+              ],
+              areaServed: [
+                { "@type": "City", name: "Miami" },
+                { "@type": "Place", name: "Brickell" },
+                { "@type": "City", name: "Doral" },
+                { "@type": "City", name: "Miami Beach" },
+                { "@type": "City", name: "Coral Gables" },
+                { "@type": "City", name: "Pinecrest" },
+                { "@type": "City", name: "Aventura" },
+                { "@type": "City", name: "Kendall" },
+                { "@type": "City", name: "Hialeah" },
+                { "@type": "City", name: "South Miami" },
+                { "@type": "AdministrativeArea", name: "Miami-Dade County" },
+                { "@type": "AdministrativeArea", name: "South Florida" },
+              ],
+              makesOffer: [
+                {
+                  "@type": "OfferCatalog",
+                  name: "Residential Painting & Decorative Finishes",
+                  itemListElement: [
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Interior Painting", description: "Full-room and whole-home interior repaints with premium, low-VOC paint systems." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Limewash Finishes", description: "Authentic breathable limewash application — one of Miami's fastest-growing luxury decorative finish trends." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Roman Clay Finishes", description: "Multi-coat specialty clay plaster applied by trained signature finish specialists." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Venetian Plaster", description: "Multi-coat burnished plaster finish for feature walls and full-room luxury applications." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Exterior Painting", description: "Full exterior repaints including pressure washing and stucco/surface resanding." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "HOA & Condo Projects", description: "Scalable, community-wide residential painting programs." } },
+                  ],
+                },
+                {
+                  "@type": "OfferCatalog",
+                  name: "Commercial Painting Programs",
+                  itemListElement: [
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Hospitality Painting", description: "Hotels and restaurants, with overnight and off-hours scheduling to avoid disrupting guest service." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Corporate Office Painting", description: "Interior painting for office suites, scheduled around business hours." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "HOA Community Painting", description: "Large-scale, phased painting programs for HOA boards and condo associations." } },
+                    { "@type": "Offer", itemOffered: { "@type": "Service", name: "Drywall Repair", description: "Commercial-grade drywall patch and finish work." } },
+                  ],
+                },
+              ],
+            }),
           }}
         />
       </head>
